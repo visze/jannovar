@@ -8,6 +8,7 @@ import de.charite.compbio.jannovar.cmd.annotate_pos.AnnotatePositionCommand;
 import de.charite.compbio.jannovar.cmd.annotate_vcf.AnnotateVCFCommand;
 import de.charite.compbio.jannovar.cmd.db_list.DatabaseListCommand;
 import de.charite.compbio.jannovar.cmd.download.DownloadCommand;
+import de.charite.compbio.jannovar.cmd.hgvs_to_genomic.HGVSToGenomicPositionCommand;
 import de.charite.compbio.jannovar.reference.TranscriptModel;
 
 /**
@@ -90,6 +91,8 @@ public final class Jannovar {
 				cmd = new AnnotateVCFCommand(newArgs);
 			} else if (argv[0].equals("annotate-pos")) {
 				cmd = new AnnotatePositionCommand(newArgs);
+			} else if (argv[0].equals("hgvs-to-genomic-pos")) {
+				cmd = new HGVSToGenomicPositionCommand(newArgs);
 			} else {
 				System.err.println("unrecognized command " + argv[0]);
 				printTopLevelHelp();

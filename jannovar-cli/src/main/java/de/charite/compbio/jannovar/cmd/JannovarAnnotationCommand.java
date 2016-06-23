@@ -20,6 +20,8 @@ public abstract class JannovarAnnotationCommand extends JannovarCommand {
 
 	/** Map of Chromosomes, used in the annotation. */
 	protected ImmutableMap<Integer, Chromosome> chromosomeMap = null;
+	
+	protected JannovarData data = null;
 
 	public JannovarAnnotationCommand(String[] argv) throws CommandLineParsingException, HelpRequestedException {
 		super(argv);
@@ -39,7 +41,7 @@ public abstract class JannovarAnnotationCommand extends JannovarCommand {
 	 *             when the user requested the help page
 	 */
 	protected void deserializeTranscriptDefinitionFile() throws JannovarException, HelpRequestedException {
-		JannovarData data = new JannovarDataSerializer(this.options.dataFile).load();
+		this.data = new JannovarDataSerializer(this.options.dataFile).load();
 		this.refDict = data.getRefDict();
 		this.chromosomeMap = data.getChromosomes();
 	}

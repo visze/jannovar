@@ -94,7 +94,7 @@ public final class JannovarOptions {
 	 * The command that is to be executed.
 	 */
 	public enum Command {
-		DOWNLOAD, ANNOTATE_VCF, ANNOTATE_POSITION, DB_LIST
+		DOWNLOAD, ANNOTATE_VCF, ANNOTATE_POSITION, DB_LIST, HGVS_TO_GENOMIC_POSITION
 	}
 
 	/**
