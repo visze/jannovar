@@ -24,25 +24,34 @@ public class HGVSToGenomicPositionCommandLineParser extends JannovarAnnotationCo
 		CommandLine cmd = parser.parse(helpOptions, argv, true);
 		printHelpIfOptionIsSet(cmd);
 		cmd = parser.parse(options, argv);
-
+        if(cmd.getOptions().length<1){	
+        	printHelp();
+        	throw new HelpRequestedException();
+        }
 		printHelpIfOptionIsSet(cmd);
 		// Fill the resulting JannovarOptions.
 		JannovarOptions result = new JannovarOptions();
 		result.printProgressBars = true;
 		result.command = JannovarOptions.Command.HGVS_TO_GENOMIC_POSITION;
 
-		
 
 		if (cmd.hasOption("verbose"))
 			result.verbosity = 2;
 		if (cmd.hasOption("very-verbose"))
 			result.verbosity = 3;
-
+          
 		
 		result.dataFile = cmd.getOptionValue("database");
 		
-		for (String change : cmd.getOptionValues("change")) {
-			result.chromosomalChanges.add(change);
+//		for (String change : cmd.getOptionValues("change")) {
+//			result.chromosomalChanges.add(change);
+//		}
+		
+		result.hgvsFile=cmd.getOptionValue("input");
+		
+		result.hgvs2vcfFile=cmd.getOptionValue("output");
+		if(cmd.hasOption("column")){
+		   result.column=Integer.valueOf(cmd.getOptionValue("column"));
 		}
 
 		return result;
@@ -51,17 +60,23 @@ public class HGVSToGenomicPositionCommandLineParser extends JannovarAnnotationCo
 	@Override
 	protected void initializeParser() {
 		super.initializeParser();
-
-		options.addOption(Option.builder("c").longOpt("change").required().hasArgs()
-				.desc("Genomic variant change").build());
+	    options.addOption(Option.builder("i").longOpt("input").required().hasArgs()
+				.desc(" the hgvs file").build());
+	    options.addOption(Option.builder("o").longOpt("output").required().hasArgs()
+				.desc(" the output vcf file").build());
+	    options.addOption(Option.builder("d").longOpt("database").required().hasArgs()
+				.desc(" the database").build());
+	    
+		options.addOption(Option.builder("c").longOpt("column").optionalArg(true).hasArgs()
+				.desc("the column of hgvs code in the hgvs file").build());
 	}
 
 	public void printHelp() {
-		final String HEADER = new StringBuilder().append("Jannovar Command: annotate-pos\n\n")
-				.append("Use this command to annotate a chromosomal change.\n\n")
-				.append("Usage: java -jar de.charite.compbio.jannovar.jar hgvs-to-genomic-pos [options] -d <database.ser> -c <HGVS_CHANGE>\n\n").toString();
+		final String HEADER = new StringBuilder().append("Jannovar Command: hgvs-to-genomic-pos\n\n")
+				.append("Use this command to parse HGVS to genomic position.\n\n")
+				.append("Usage: java -jar de.charite.compbio.jannovar.jar hgvs-to-genomic-pos [options] -d <database.ser> -i <HGVS_input> -o <vcf_output> -c <column>\n\n").toString();
 		final String FOOTER = new StringBuilder().append(
-				"\n\nExample: java -jar de.charite.compbio.jannovar.jar hgvs-to-genomic-pos -d data/hg19_refseq.ser -c 'NM_032129.2:c.1460G'\n\n").toString();
+				"\n\nExample: java -jar de.charite.compbio.jannovar.jar hgvs-to-genomic-pos -d data/hg19_refseq.ser -c 1 -i hgvs.txt  -o hgvs2vcf\n\n").toString();
 
 		System.err.print(HEADER);
 
@@ -70,6 +85,12 @@ public class HGVSToGenomicPositionCommandLineParser extends JannovarAnnotationCo
 		hf.printOptions(pw, 78, options, 2, 2);
 
 		System.err.print(FOOTER);
+	}
+	protected void printHelpIfOptionIsSet(CommandLine cmd) throws HelpRequestedException {
+		if (cmd.hasOption("help")) {
+			printHelp();
+			throw new HelpRequestedException();
+		}
 	}
 
 }

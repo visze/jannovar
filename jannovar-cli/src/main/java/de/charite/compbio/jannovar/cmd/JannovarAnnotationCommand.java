@@ -21,7 +21,7 @@ public abstract class JannovarAnnotationCommand extends JannovarCommand {
 	/** Map of Chromosomes, used in the annotation. */
 	protected ImmutableMap<Integer, Chromosome> chromosomeMap = null;
 	
-	protected JannovarData data = null;
+	protected  JannovarData data = null;
 
 	public JannovarAnnotationCommand(String[] argv) throws CommandLineParsingException, HelpRequestedException {
 		super(argv);

@@ -92,7 +92,6 @@ public final class Jannovar {
 			} else if (argv[0].equals("annotate-pos")) {
 				cmd = new AnnotatePositionCommand(newArgs);
 			} else if (argv[0].equals("hgvs-to-genomic-pos")) {
-				
 				cmd = new HGVSToGenomicPositionCommand(newArgs);
 			} else {
 				System.err.println("unrecognized command " + argv[0]);
@@ -101,6 +100,8 @@ public final class Jannovar {
 		} catch (CommandLineParsingException e) {
 			System.err.println("ERROR: problem with parsing command line options: " + e.getMessage());
 			System.err.println("");
+			printTopLevelHelp();
+			
 			System.err.println("Use --help for obtaining usage instructions.");
 		} catch (HelpRequestedException e) {
 			return; // no error, user wanted help
@@ -134,13 +135,12 @@ public final class Jannovar {
 		System.err.println("         db-list       list downloadable databases");
 		System.err.println("         annotate      functional annotation of VCF files");
 		System.err.println("         annotate-pos  functional annotation of genomic change");
+		System.err.println("         hgvs-to-genomic-pos  parse hgvs to genomic position");
 		System.err.println("");
 		System.err.println("Example: java -jar de.charite.compbio.jannovar.jar download -d hg19/ucsc");
 		System.err.println("         java -jar de.charite.compbio.jannovar.jar db-list");
-		System.err
-				.println("         java -jar de.charite.compbio.jannovar.jar annotate -d data/hg19_ucsc.ser -i variants.vcf");
-		System.err
-				.println("         java -jar de.charite.compbio.jannovar.jar annotate-pos -d data/hg19_ucsc.ser -c 'chr1:12345C>A'");
+		System.err.println("         java -jar de.charite.compbio.jannovar.jar annotate -d data/hg19_ucsc.ser -i variants.vcf");
+		System.err.println("         java -jar de.charite.compbio.jannovar.jar hgvs-to-genomic-pos -d data/hg19_ucsc.ser -i hgvs.txt -o hgvs2vcf.vcf");
 		System.err.println("");
 	}
 

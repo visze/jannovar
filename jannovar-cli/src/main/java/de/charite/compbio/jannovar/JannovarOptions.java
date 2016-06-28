@@ -56,7 +56,17 @@ public final class JannovarOptions {
 
 	/** path to the file with the serialized data */
 	public String dataFile = null;
+	
+	/** path to the file with the HGVS code*/
+    public String hgvsFile=null;
+    
 
+	/** path to the vcf file parsed from the HGVS code*/
+    public String hgvs2vcfFile=null;
+    
+    /** the column of HGVS code in hgvsFile*/
+    public int column=1;
+    
 	/** whether to write the result in the Jannovar format */
 	public boolean jannovarFormat = false;
 
@@ -119,6 +129,11 @@ public final class JannovarOptions {
 			out.println("writeJannovarInfoFields: " + writeJannovarInfoFields);
 			out.println("writeVCFAnnotationStandardInfoFields: " + writeVCFAnnotationStandardInfoFields);
 			out.println("output infix: " + outputInfix);
+		}else if (command == Command.HGVS_TO_GENOMIC_POSITION) {
+			out.println("inputFile: " + hgvsFile);
+			out.println("dataFile: " + dataFile);
+			out.println("the"+ column+"th column in "  + hgvsFile+" is HGVS code");
+			out.println("outputFile: " + hgvs2vcfFile);
 		} else if (command == Command.DB_LIST) {
 			out.println("dataSourceFiles: " + dataSourceFiles);
 		}
