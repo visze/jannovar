@@ -92,6 +92,7 @@ public final class Jannovar {
 			} else if (argv[0].equals("annotate-pos")) {
 				cmd = new AnnotatePositionCommand(newArgs);
 			} else if (argv[0].equals("hgvs-to-genomic-pos")) {
+				
 				cmd = new HGVSToGenomicPositionCommand(newArgs);
 			} else {
 				System.err.println("unrecognized command " + argv[0]);
