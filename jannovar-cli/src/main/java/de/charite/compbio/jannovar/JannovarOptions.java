@@ -64,6 +64,9 @@ public final class JannovarOptions {
 	/** path to the vcf file parsed from the HGVS code*/
     public String hgvs2vcfFile=null;
     
+    /** put HGVS code to be annotated */
+    public ArrayList<String> hgvs_ids=new ArrayList<String>();
+    
     /** the column of HGVS code in hgvsFile*/
     public int column=1;
     
@@ -104,7 +107,7 @@ public final class JannovarOptions {
 	 * The command that is to be executed.
 	 */
 	public enum Command {
-		DOWNLOAD, ANNOTATE_VCF, ANNOTATE_POSITION, DB_LIST, HGVS_TO_GENOMIC_POSITION
+		DOWNLOAD, ANNOTATE_VCF, ANNOTATE_POSITION, DB_LIST, HGVS_TO_GENOMIC_POSITION, HGVS2VCF
 	}
 
 	/**
@@ -129,11 +132,14 @@ public final class JannovarOptions {
 			out.println("writeJannovarInfoFields: " + writeJannovarInfoFields);
 			out.println("writeVCFAnnotationStandardInfoFields: " + writeVCFAnnotationStandardInfoFields);
 			out.println("output infix: " + outputInfix);
-		}else if (command == Command.HGVS_TO_GENOMIC_POSITION) {
+		}else if (command == Command.HGVS2VCF) {
 			out.println("inputFile: " + hgvsFile);
 			out.println("dataFile: " + dataFile);
 			out.println("the"+ column+"th column in "  + hgvsFile+" is HGVS code");
 			out.println("outputFile: " + hgvs2vcfFile);
+		} else if (command == Command.HGVS_TO_GENOMIC_POSITION) {
+			out.println("dataFile: " + dataFile);
+			out.println("HGVS IDs: " + hgvs_ids);
 		} else if (command == Command.DB_LIST) {
 			out.println("dataSourceFiles: " + dataSourceFiles);
 		}

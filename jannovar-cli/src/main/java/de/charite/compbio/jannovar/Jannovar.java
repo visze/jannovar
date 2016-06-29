@@ -8,6 +8,7 @@ import de.charite.compbio.jannovar.cmd.annotate_pos.AnnotatePositionCommand;
 import de.charite.compbio.jannovar.cmd.annotate_vcf.AnnotateVCFCommand;
 import de.charite.compbio.jannovar.cmd.db_list.DatabaseListCommand;
 import de.charite.compbio.jannovar.cmd.download.DownloadCommand;
+import de.charite.compbio.jannovar.cmd.hgvs2vcf.HGVS2VCFCommand;
 import de.charite.compbio.jannovar.cmd.hgvs_to_genomic.HGVSToGenomicPositionCommand;
 import de.charite.compbio.jannovar.reference.TranscriptModel;
 
@@ -93,6 +94,8 @@ public final class Jannovar {
 				cmd = new AnnotatePositionCommand(newArgs);
 			} else if (argv[0].equals("hgvs-to-genomic-pos")) {
 				cmd = new HGVSToGenomicPositionCommand(newArgs);
+			}else if (argv[0].equals("hgvs2vcf")) {
+				cmd = new HGVS2VCFCommand(newArgs);
 			} else {
 				System.err.println("unrecognized command " + argv[0]);
 				printTopLevelHelp();
@@ -136,11 +139,14 @@ public final class Jannovar {
 		System.err.println("         annotate      functional annotation of VCF files");
 		System.err.println("         annotate-pos  functional annotation of genomic change");
 		System.err.println("         hgvs-to-genomic-pos  parse hgvs to genomic position");
+		System.err.println("         hgvs2vcf  parse hgvs position to vcf format");
 		System.err.println("");
 		System.err.println("Example: java -jar de.charite.compbio.jannovar.jar download -d hg19/ucsc");
 		System.err.println("         java -jar de.charite.compbio.jannovar.jar db-list");
 		System.err.println("         java -jar de.charite.compbio.jannovar.jar annotate -d data/hg19_ucsc.ser -i variants.vcf");
-		System.err.println("         java -jar de.charite.compbio.jannovar.jar hgvs-to-genomic-pos -d data/hg19_ucsc.ser -i hgvs.txt -o hgvs2vcf.vcf");
+		System.err.println("         java -jar de.charite.compbio.jannovar.jar annotate-pos -d data/hg19_ucsc.ser -c 'chr1:12345C>A'");
+		System.err.println("         java -jar de.charite.compbio.jannovar.jar hgvs-to-genomic-pos -d data/hg19_ucsc.ser -c 'NM_002834.3:c.923A>G'");
+		System.err.println("         java -jar de.charite.compbio.jannovar.jar hgvs2vcf -d data/hg19_ucsc.ser -i hgvs.txt -o hgvs2vcf.vcf");
 		System.err.println("");
 	}
 

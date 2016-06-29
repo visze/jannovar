@@ -1,4 +1,4 @@
-package de.charite.compbio.jannovar.cmd.hgvs_to_genomic;
+package de.charite.compbio.jannovar.cmd.hgvs2vcf;
 
 public class HGVS {
    private String transcriptcode;
@@ -11,6 +11,7 @@ public class HGVS {
    private String change;
    private String hgvs;
    private int repeats=1;
+   private int intron=0;
    public boolean correct=false;
    public HGVS(String hgvs){
 	    this.hgvs=hgvs;
@@ -41,6 +42,9 @@ public class HGVS {
 	   
 	   return this.change;
    }
+   public String getName(){
+	   return this.hgvs;
+   }
    
   public int getRepeat(){
 	   
@@ -51,6 +55,9 @@ public class HGVS {
    }
    public int getInterval(){
 	   return this.interval;
+   }
+   public int getIntron(){
+	   return this.intron;
    }
    public void setTranscript(String code){
 	   System.err.println("Warning: "+this.transcriptcode+" does not exist,"+ "now it is suggestd as "+code+"!");
@@ -73,14 +80,25 @@ public class HGVS {
 	   }
 	   this.type=infos[0].charAt(0);
 	   if(infos[1].contains("+")||infos[1].contains("-")){
-		   System.err.println("Warning: "+this.hgvs+" is in the intron, currently it won't work for uncharacterised breakpoints");
-		   return false;
-	   }
-	   if(infos[1].contains(">")){
+		   //positon+1 or -1
+		   String[] pos_infos=infos[1].split("-|\\+");
+		   this.offset=Integer.valueOf(pos_infos[0].replaceAll("[^0-9]+", ""));
+		   if(infos[1].contains("+")){
+			   this.intron=Integer.valueOf(pos_infos[1].split("A|C|G|T")[0]);
+		   }else{
+			   this.intron=-Integer.valueOf(pos_infos[1].split("A|C|G|T")[0]);
+		   }
+		   String[] infos2=infos[1].split(">|-|\\+");
+		   this.ref=infos2[1].substring((int)Math.log10(Math.abs(this.intron))+1);
+		   this.alt=String.valueOf(infos2[2]);
+		   this.change="Substitutions";
+		   System.err.println("Warning: "+this.hgvs+"\t"+this.ref+"\t"+this.alt+"\t"+this.offset+"\t"+this.intron+" is in the intron, currently it won't work for uncharacterised breakpoints");
+		   return true;
+	   }else if(infos[1].contains(">")){
 		   
 		   String[] change_infos=infos[1].split("A|C|G|T");
 		   try{
-			   this.offset=Integer.valueOf(change_infos[0]).intValue();
+			   this.offset=Integer.valueOf(change_infos[0].replaceAll("[^0-9]+", "")).intValue();
 		   }catch(NumberFormatException e){
 			   System.err.println("Warning: "+change_infos[0]+" cannot parse into Integer!");
 			   return false;

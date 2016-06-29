@@ -1,4 +1,4 @@
-package de.charite.compbio.jannovar.cmd.hgvs_to_genomic;
+package de.charite.compbio.jannovar.cmd.hgvs2vcf;
 
 import java.io.PrintWriter;
 
@@ -12,11 +12,11 @@ import de.charite.compbio.jannovar.cmd.HelpRequestedException;
 import de.charite.compbio.jannovar.cmd.JannovarAnnotationCommandLineParser;
 
 /**
- * Parse the command line for the "annotate-position" command.
+ * Parse the command line for the "hgvs2vcf" command.
  *
- * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
+ * @author <a href="mailto:na.zhu@charite.de">Na Zhu</a>
  */
-public class HGVSToGenomicPositionCommandLineParser extends JannovarAnnotationCommandLineParser {
+public class HGVS2VCFCommandLineParser extends JannovarAnnotationCommandLineParser {
 
 	@Override
 	public JannovarOptions parse(String[] argv) throws ParseException, HelpRequestedException {
