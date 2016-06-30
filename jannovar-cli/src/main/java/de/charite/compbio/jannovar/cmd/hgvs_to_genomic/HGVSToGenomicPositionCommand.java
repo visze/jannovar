@@ -14,6 +14,8 @@ import de.charite.compbio.jannovar.annotation.builders.AnnotationBuilderOptions;
 import de.charite.compbio.jannovar.cmd.CommandLineParsingException;
 import de.charite.compbio.jannovar.cmd.HelpRequestedException;
 import de.charite.compbio.jannovar.cmd.JannovarAnnotationCommand;
+import de.charite.compbio.jannovar.cmd.hgvs2vcf.HGVS;
+import de.charite.compbio.jannovar.cmd.hgvs2vcf.HGVS_Parser;
 import de.charite.compbio.jannovar.hgvs.parser.HGVSParser;
 import de.charite.compbio.jannovar.reference.CDSPosition;
 import de.charite.compbio.jannovar.reference.GenomePosition;
@@ -57,34 +59,46 @@ public class HGVSToGenomicPositionCommand extends JannovarAnnotationCommand {
 		System.out.println("#change\teffect\thgvs_annotation");
 		for (String hgvsChange : options.chromosomalChanges) {
 			// Parse the chromosomal change string into a GenomeChange object.
-			final CDSPosition cdsPosition = parseHGVSChange(hgvsChange);
+//			final CDSPosition cdsPosition = parseHGVSChange(hgvsChange);
 
-			GenomePosition genomePosition = new TranscriptProjectionDecorator(cdsPosition.getTranscript())
-					.cdsToGenomePos(cdsPosition);
-			GenomeVariant genomeChange = new GenomeVariant(genomePosition, "A", "C");
-
-			// Construct VariantAnnotator for building the variant annotations.
-			VariantAnnotations annoList = null;
-			try {
-				annoList = annotator.buildAnnotations(genomeChange);
-			} catch (Exception e) {
-				System.err.println(String.format("[ERROR] Could not annotate variant %s!", hgvsChange));
-				e.printStackTrace(System.err);
+//			GenomePosition genomePosition = new TranscriptProjectionDecorator(cdsPosition.getTranscript())
+//					.cdsToGenomePos(cdsPosition);
+//			
+			HGVS hgvs=new HGVS(hgvsChange);
+			
+			if(!hgvs.isCorrect()){
+				System.err.println("Format Error"); 
 				continue;
 			}
-
-			// Obtain first or all functional annotation(s) and effect(s).
-			final String annotation;
-			final String effect;
-			VariantAnnotationsTextGenerator textGenerator;
-			if (options.showAll)
-				textGenerator = new AllAnnotationListTextGenerator(annoList, 0, 1);
-			else
-				textGenerator = new BestAnnotationListTextGenerator(annoList, 0, 1);
-			annotation = textGenerator.buildHGVSText();
-			effect = textGenerator.buildEffectText();
-
-			System.out.println(String.format("%s\t%s\t%s", genomeChange.toString(), effect, annotation));
+			/** parse a HGVS ID to gensortedVCWriteromic postion**/
+			HGVS_Parser parser=new HGVS_Parser(data);
+			if(parser.parse(hgvs)){
+				GenomeVariant genomeChange =parser.variant;
+				// Construct VariantAnnotator for building the variant annotations.
+				VariantAnnotations annoList = null;
+				try {
+					annoList = annotator.buildAnnotations(genomeChange);
+				} catch (Exception e) {
+					System.err.println(String.format("[ERROR] Could not annotate variant %s!", hgvsChange));
+					e.printStackTrace(System.err);
+					continue;
+				}
+	
+				// Obtain first or all functional annotation(s) and effect(s).
+				final String annotation;
+				final String effect;
+				VariantAnnotationsTextGenerator textGenerator;
+				if (options.showAll)
+					textGenerator = new AllAnnotationListTextGenerator(annoList, 0, 1);
+				else
+					textGenerator = new BestAnnotationListTextGenerator(annoList, 0, 1);
+				annotation = textGenerator.buildHGVSText();
+				effect = textGenerator.buildEffectText();
+	
+				System.out.println(String.format("%s\t%s\t%s", genomeChange.toString(), effect, annotation));
+			}else{
+				System.err.println(hgvsChange+ " cannot find in the databse!");
+			}
 		}
 	}
 
