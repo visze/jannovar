@@ -10,20 +10,22 @@ import de.charite.compbio.jannovar.reference.Strand;
 import de.charite.compbio.jannovar.reference.TranscriptModel;
 import de.charite.compbio.jannovar.reference.TranscriptProjectionDecorator;
 
+/** A  parser to parse HGVS to Genomic**/
 
 public class HGVS_Parser {
 	private JannovarData data;
-	GenomeVariant variant=null;
-    String ref;
-    String alt;
+	public GenomeVariant variant=null;
+    public String ref;
+    public String alt;
     int position;
     String chr;
     HGVS hgvs;
+    boolean corrected=false;
 	public HGVS_Parser(JannovarData data){
 		this.data=data;
 	}
 	/** parse the HGVS ID to Genomic position, it only works for cdna
-	 *  it only works for the variant change in transcript.
+	 *  
 	 * 
 	 *  return GenomeVariant
 	 * **/
@@ -61,7 +63,7 @@ public class HGVS_Parser {
 		    if(hgvs.getIntron()!=0&&hgvs.getChange().equals("Substitutions")){
 		    	newref=hgvs.getRefAllele();
 		    }
-		   
+		    /*If it is indel, it has to figure out the referrence allele and alternate allele by left-alignment */
 		    if(hgvs.getChange().equals("DEL")||hgvs.getChange().equals("DELINS")){
 		    	 if(m.getStrand().isForward()){
 		    		 newalt=tpd.getCDSTranscript().substring(hgvs.getOffset()-2,hgvs.getOffset()-1);
@@ -112,6 +114,7 @@ public class HGVS_Parser {
 		    }else{
 		    	this.variant=new GenomeVariant(gpos.shifted(hgvs.getIntron()),newref,newalt,m.getStrand());
 		    }
+		    /** translate this variants with strand forward */
 		    this.variant=variant.withStrand(Strand.FWD);
 		    this.alt=newalt;
 		    this.ref=newref;

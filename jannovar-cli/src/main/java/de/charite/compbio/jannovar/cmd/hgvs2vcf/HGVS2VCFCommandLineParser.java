@@ -72,11 +72,11 @@ public class HGVS2VCFCommandLineParser extends JannovarAnnotationCommandLinePars
 	}
 
 	public void printHelp() {
-		final String HEADER = new StringBuilder().append("Jannovar Command: hgvs-to-genomic-pos\n\n")
-				.append("Use this command to parse HGVS to genomic position.\n\n")
-				.append("Usage: java -jar de.charite.compbio.jannovar.jar hgvs-to-genomic-pos [options] -d <database.ser> -i <HGVS_input> -o <vcf_output> -c <column>\n\n").toString();
+		final String HEADER = new StringBuilder().append("Jannovar Command: hgvs2vcf\n\n")
+				.append("Use this command to parse HGVS to VCF format.\n\n")
+				.append("Usage: java -jar de.charite.compbio.jannovar.jar hgvs2vcf [options] -d <database.ser> -i <HGVS_input> -o <vcf_output> -c <column>\n\n").toString();
 		final String FOOTER = new StringBuilder().append(
-				"\n\nExample: java -jar de.charite.compbio.jannovar.jar hgvs-to-genomic-pos -d data/hg19_refseq.ser -c 1 -i hgvs.txt  -o hgvs2vcf\n\n").toString();
+				"\n\nExample: java -jar de.charite.compbio.jannovar.jar hgvs2vcf -d data/hg19_refseq.ser -c 1 -i hgvs.txt  -o hgvs2vcf\n\n").toString();
 
 		System.err.print(HEADER);
 

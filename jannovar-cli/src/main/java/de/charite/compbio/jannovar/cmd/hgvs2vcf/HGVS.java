@@ -1,18 +1,37 @@
 package de.charite.compbio.jannovar.cmd.hgvs2vcf;
 
+/**
+ * Represent a HGVS variants
+ * Define the HGVS fields
+ * 
+ * **/
 public class HGVS {
+	/** define the transcript code, its format such as: NC_000008.10 **/
    private String transcriptcode;
+   /** define simple transcript code, it is part of transcriptcode. its format such as: NC_000008 **/
    private String transcriptcode_2;
+   /** define the reference sequence, such as c: coding DNA reference sequence   g: genomic reference sequence */
    private char type;
+   /** define the offset of this variant in the transcript region**/
    private int offset;
+   /** define the length of the variants, for substitution, interval is 1, otherwise >1*/
    private int interval=1;
+   /** define the reference allele of the variants in the HGVS code*/
    private String ref;
+   /** define the variant allele of the variants in the HGVS code*/
    private String alt;
+   /** define the change type of the variants in the HGVS code, SUBSTRITUTION, DEL, INS....*/
    private String change;
+   /** define the hgvs name , e.g NM_017837.3:c.1022C>A*/
    private String hgvs;
+   /** used for DUP, define the replicate times*/
    private int repeats=1;
+   /** used for the variants in the intron, define the distance from the cds transcript*/
    private int intron=0;
+   /** used for marking whether the hgvs code parse into this class correctly*/
    public boolean correct=false;
+   
+   /* constructor for this class **/
    public HGVS(String hgvs){
 	    this.hgvs=hgvs;
 	    this.correct= SetFields();;
@@ -74,13 +93,16 @@ public class HGVS {
 	   this.transcriptcode=hgvs_infos[0];
 	   this.transcriptcode_2=hgvs_infos[0].split("\\.")[0];
 	   String infos[]=hgvs_infos[1].split("\\.");
+	   /** incomplete code */
 	   if(infos.length<2){
 		   System.err.println("Warning: "+"Wrong Transcript Format");
 		   return false;
 	   }
+	   /**set type */
 	   this.type=infos[0].charAt(0);
+	   
+	   /** If this variant in the intron, extract all infos*/
 	   if(infos[1].contains("+")||infos[1].contains("-")){
-		   //positon+1 or -1
 		   String[] pos_infos=infos[1].split("-|\\+");
 		   this.offset=Integer.valueOf(pos_infos[0].replaceAll("[^0-9]+", ""));
 		   if(infos[1].contains("+")){
@@ -88,13 +110,20 @@ public class HGVS {
 		   }else{
 			   this.intron=-Integer.valueOf(pos_infos[1].split("A|C|G|T")[0]);
 		   }
-		   String[] infos2=infos[1].split(">|-|\\+");
-		   this.ref=infos2[1].substring((int)Math.log10(Math.abs(this.intron))+1);
-		   this.alt=String.valueOf(infos2[2]);
-		   this.change="Substitutions";
-		   System.err.println("Warning: "+this.hgvs+"\t"+this.ref+"\t"+this.alt+"\t"+this.offset+"\t"+this.intron+" is in the intron, currently it won't work for uncharacterised breakpoints");
-		   return true;
-	   }else if(infos[1].contains(">")){
+		   if(infos[1].contains(">")){
+			   String[] infos2=infos[1].split(">|-|\\+");
+			   this.ref=infos2[1].substring((int)Math.log10(Math.abs(this.intron))+1);
+			   this.alt=String.valueOf(infos2[2]);
+			   this.change="Substitutions";
+			   return true;
+		   }else{
+			   System.err.println("Warning: "+this.hgvs+"\t"+this.ref+"\t"+this.alt+"\t"+this.offset+"\t"+this.intron+" is in the intron, currently it won't work for uncharacterised breakpoints");
+		       return false;
+		   }   
+		   
+	   }
+	   /**if it is a substrituion*/
+	   else if(infos[1].contains(">")){
 		   
 		   String[] change_infos=infos[1].split("A|C|G|T");
 		   try{
