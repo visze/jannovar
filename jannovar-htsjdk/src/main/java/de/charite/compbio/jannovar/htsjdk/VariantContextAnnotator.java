@@ -26,6 +26,7 @@ import de.charite.compbio.jannovar.reference.Strand;
 import de.charite.compbio.jannovar.reference.TranscriptModel;
 import htsjdk.variant.variantcontext.Allele;
 import htsjdk.variant.variantcontext.VariantContext;
+import htsjdk.variant.variantcontext.VariantContextBuilder;
 
 /**
  * Helper class for generating {@link VariantAnnotations} objects from {@link VariantContext}s.
@@ -281,9 +282,7 @@ public final class VariantContextAnnotator {
 				}
 			}
 		}
-		vc.getCommonInfo().putAttribute("ANN", Joiner.on(',').join(annotations), true); // true allows overwriting
-
-		return vc;
+		return new VariantContextBuilder(vc).attribute("ANN", Joiner.on(',').join(annotations)).make();
 	}
 
 	/**

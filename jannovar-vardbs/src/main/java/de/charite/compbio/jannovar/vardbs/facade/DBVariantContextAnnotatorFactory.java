@@ -4,6 +4,7 @@ import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
 import de.charite.compbio.jannovar.vardbs.base.JannovarVarDBException;
 import de.charite.compbio.jannovar.vardbs.dbsnp.DBSNPAnnotationDriver;
 import de.charite.compbio.jannovar.vardbs.exac.ExacAnnotationDriver;
+import de.charite.compbio.jannovar.vardbs.tabix.TabixAnnotationDriver;
 import de.charite.compbio.jannovar.vardbs.uk10k.UK10KAnnotationDriver;
 import htsjdk.variant.variantcontext.VariantContext;
 
@@ -66,6 +67,24 @@ public class DBVariantContextAnnotatorFactory {
 	public DBVariantContextAnnotator constructUK10K(String vcfDBPath, String fastaRefPath, DBAnnotationOptions options)
 			throws JannovarVarDBException {
 		return new DBVariantContextAnnotator(new UK10KAnnotationDriver(vcfDBPath, fastaRefPath, options), options);
+	}
+
+	/**
+	 * Construct Tabix {@link VariantContext} annotator factory.
+	 * 
+	 * @param tabixDBPath
+	 *            Path to gzip-compressed, tbi-indexed tabix including ref and alt
+	 * @param fastaRefPath
+	 *            Path to reference FASTA file
+	 * @param options
+	 *            Configuration for the variant context annotaiton
+	 * @return Preconfigured {@link DBVariantContextAnnotator} object
+	 * @throws JannovarVarDBException
+	 *             on problems loading the resources
+	 */
+	public DBVariantContextAnnotator constructTabix(String snvDBPath, String fastaRefPath,
+			DBAnnotationOptions options) throws JannovarVarDBException {
+		return new DBVariantContextAnnotator(new TabixAnnotationDriver(snvDBPath, fastaRefPath, options), options);
 	}
 
 }
