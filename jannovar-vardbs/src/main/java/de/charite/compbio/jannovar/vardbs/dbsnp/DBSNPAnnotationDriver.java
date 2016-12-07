@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
-import de.charite.compbio.jannovar.vardbs.base.AbstractDBAnnotationDriver;
+import de.charite.compbio.jannovar.vardbs.base.AbstractVCFDBAnnotationDriver;
 import de.charite.compbio.jannovar.vardbs.base.AnnotatingRecord;
 import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
 import de.charite.compbio.jannovar.vardbs.base.GenotypeMatch;
@@ -21,7 +21,7 @@ import htsjdk.variant.variantcontext.VariantContextBuilder;
  *
  * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
  */
-final public class DBSNPAnnotationDriver extends AbstractDBAnnotationDriver<DBSNPRecord> {
+final public class DBSNPAnnotationDriver extends AbstractVCFDBAnnotationDriver<DBSNPRecord> {
 
 	/** Information about the dbSNP VCF file */
 	final private DBSNPInfo dbSNPInfo;

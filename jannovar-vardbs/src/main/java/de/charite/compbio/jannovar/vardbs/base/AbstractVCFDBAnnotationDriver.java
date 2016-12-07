@@ -14,7 +14,7 @@ import htsjdk.variant.vcf.VCFFileReader;
  * 
  * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
  */
-public abstract class AbstractDBAnnotationDriver<RecordType> implements DBAnnotationDriver {
+public abstract class AbstractVCFDBAnnotationDriver<RecordType> implements DBAnnotationDriver {
 
 	/** Path to dbSNP VCF file */
 	protected final String vcfPath;
@@ -41,7 +41,7 @@ public abstract class AbstractDBAnnotationDriver<RecordType> implements DBAnnota
 	 * @throws JannovarVarDBException
 	 *             on problems loading the reference FASTA/FAI file or incompatible dbSNP version
 	 */
-	public AbstractDBAnnotationDriver(String vcfPath, String fastaPath, DBAnnotationOptions options,
+	public AbstractVCFDBAnnotationDriver(String vcfPath, String fastaPath, DBAnnotationOptions options,
 			VariantContextToRecordConverter<RecordType> vcToRecord) throws JannovarVarDBException {
 		this.vcfPath = vcfPath;
 		this.matcher = new AlleleMatcher(fastaPath);

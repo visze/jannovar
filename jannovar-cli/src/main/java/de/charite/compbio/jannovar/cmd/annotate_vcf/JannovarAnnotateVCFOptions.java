@@ -1,5 +1,8 @@
 package de.charite.compbio.jannovar.cmd.annotate_vcf;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiFunction;
 
 import de.charite.compbio.jannovar.UncheckedJannovarException;
@@ -53,6 +56,12 @@ public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
 	/** Path to pedigree file */
 	public String pathPedFile;
 
+	/** Path to the Tabix file */
+	public List<String> pathTabix;
+
+	/** Prefix to use for Tabix INFO Fields */
+	public List<String> prefixTabix;
+
 	/**
 	 * Setup {@link ArgumentParser}
 	 * 
@@ -93,6 +102,11 @@ public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
 				.required(false);
 		annotationGroup.addArgument("--uk10k-prefix").help("Prefix for UK10K annotations").setDefault("UK10K_")
 				.required(false);
+		annotationGroup.addArgument("--tabix")
+				.help("Path to tabix file(s), activates TABIX annotation with ref and alts").setDefault(new ArrayList<>()).nargs("*").required(false);
+		annotationGroup.addArgument("--tabix-prefix")
+				.help("Prefix for TABIX annotations. Needed if multiple files are used!").nargs("*").setDefault(Arrays.asList("TABIX_"))
+				.required(false);
 
 		ArgumentGroup optionalGroup = subParser.addArgumentGroup("Other, optional Arguments");
 		optionalGroup.addArgument("--no-escape-ann-field").help("Disable escaping of INFO/ANN field in VCF output")
@@ -122,6 +136,9 @@ public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
 		prefixExac = args.getString("exac_prefix");
 		pathVCFUK10K = args.getString("uk10k_vcf");
 		prefixUK10K = args.getString("uk10k_prefix");
+		pathTabix = args.getList("tabix");
+		prefixTabix = args.getList("tabix_prefix");
+
 	}
 
 	public String getPathInputVCF() {

@@ -263,8 +263,8 @@ public final class VariantContextAnnotator {
 	}
 
 	/**
-	 * Write annotations from <code>annos</code> to <code>vc</code>
-	 *l
+	 * Write annotations from <code>annos</code> to <code>vc</code> l
+	 * 
 	 * @param vc
 	 *            {@link VariantContext} to write the annotations to (to INFO column)
 	 * @param annos

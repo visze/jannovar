@@ -109,12 +109,26 @@ public class AnnotateVCFCommand extends JannovarAnnotationCommand {
 
 			// If configured, annotate using UK10K VCF file (extend header to use for writing out)
 			if (options.pathVCFUK10K != null) {
-				DBAnnotationOptions exacOptions = DBAnnotationOptions.createDefaults();
-				exacOptions.setIdentifierPrefix(options.prefixUK10K);
+				DBAnnotationOptions uk10KOptions = DBAnnotationOptions.createDefaults();
+				uk10KOptions.setIdentifierPrefix(options.prefixUK10K);
 				DBVariantContextAnnotator uk10kAnno = new DBVariantContextAnnotatorFactory()
-						.constructUK10K(options.pathVCFUK10K, options.pathFASTARef, exacOptions);
+						.constructUK10K(options.pathVCFUK10K, options.pathFASTARef, uk10KOptions);
 				uk10kAnno.extendHeader(vcfHeader);
 				stream = stream.map(uk10kAnno::annotateVariantContext);
+			}
+
+			// If configured, annotate using tabix files (extend header to use for writing out)
+			if (!options.pathTabix.isEmpty()) {
+				for (int i = 0; i < options.pathTabix.size(); i++) {
+					DBAnnotationOptions tabixOptions = DBAnnotationOptions.createDefaults();
+					tabixOptions.setIdentifierPrefix((options.prefixTabix.size() == 1 ? options.prefixTabix.get(0)
+							: options.prefixTabix.get(i)));
+					DBVariantContextAnnotator tabixAnno = new DBVariantContextAnnotatorFactory()
+							.constructTabix(options.pathTabix.get(i), options.pathFASTARef, tabixOptions);
+					tabixAnno.extendHeader(vcfHeader);
+					stream = stream.map(tabixAnno::annotateVariantContext);
+				}
+
 			}
 
 			// Extend header with INHERITANCE filter
