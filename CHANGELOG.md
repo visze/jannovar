@@ -2,17 +2,21 @@
 
 ## develop
 
+## v0.18
+
 ### all
 
 * replace charite email of p. robinson with the new one of jax
 
 ### jannovar-cli
 
+* Renaming `tx-to-chrom` to `hgvs-to-vcf`, also in Java module names.
 * CLI changes such that one VCF input and one VCF output path can be used only
 * Replacing apache commons-cli with argparse4j for a more modern and usable CLI
 * Consistently writing out HUGO symbols for gene names, using the `hgnc_complete_set.txt` information downloaded when building the annotation DB
 * Upgrading from ENSEMBL-74 to ENSEMBL-75 for annotation database files
 * Removing support for old Jannovar-style annotations (#241)
+* Adding new command for annotating csv files (annotate-csv)
 
 ### jannovar-htsjdk
 
@@ -25,7 +29,15 @@
 * fixing bug #248 for ENSEMBL that used `gene_id` for `gene_name`
 * bugfix of NullPointerException in RefSeqParser while parsing refSeq curated
 * bugfix space in SeqOID of SYNONYMOUS_VARIANT 
-* Update link to HGVS Nomenclature 
+* Update link to HGVS Nomenclature
+* Now BestAnnotationListTextGenerator shows really the best and not all annotations!
+
+### Manual
+
+* Documenting cli changes
+* Adding additional sites contributing, FAQ and how to filter
+* Better description of installations and quickstart
+
 
 ## v0.17
 

@@ -1,4 +1,4 @@
-package de.charite.compbio.jannovar.cmd.tx_to_chrom;
+package de.charite.compbio.jannovar.cmd.hgvs_to_vcf;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -74,7 +74,6 @@ public class ProjectTranscriptToChromosome extends JannovarAnnotationCommand {
 		System.err.println("Opening output VCF file...");
 		try (VariantContextWriter writer = openOutputFile()) {
 			processFile(writer);
-			writer.close();
 		}
 	}
 
@@ -101,7 +100,7 @@ public class ProjectTranscriptToChromosome extends JannovarAnnotationCommand {
 				"Problem in parsing original HGVS variant string, written out as variant at 1:g.1N>N"));
 		header.addMetaDataLine(new VCFInfoHeaderLine("ERROR_MESSAGE", 1, VCFHeaderLineType.String, "Error message"));
 		header.addMetaDataLine(new VCFInfoHeaderLine("ORIG_VAR", 1, VCFHeaderLineType.String,
-				"Original HGVS variant string from input file to tx-to-vcf"));
+				"Original HGVS variant string from input file to hgvs-to-vcf"));
 
 		writer.writeHeader(header);
 
