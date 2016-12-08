@@ -64,6 +64,35 @@ public final class AlleleMatcher {
 	}
 
 	/**
+	 * Match genotypes of two {@link VariantContext}s
+	 * 
+	 * Indels will be left-shifted and normalized when necessary
+	 * 
+	 * @param obsVC
+	 *            {@link VariantContext} describing the observed variant
+	 * @param dbVC
+	 *            {@link VariantContext} describing the database variant
+	 * @return {@link Collection} of {@link GenotypeMatch}es for the two variants
+	 */
+	public Collection<FeatureMatch> matchGenotypes(VariantContext obsVC, TabixFeature dbFeature) {
+		List<FeatureMatch> result = new ArrayList<>();
+
+		// Get normalized description of all alternative observed and database alleles
+		Collection<VariantDescription> obsVars = ctxToVariants(obsVC);
+		VariantDescription dbVar = featureToVariant(dbFeature);
+
+		int i = 1; // excludes reference allele
+		for (VariantDescription obsVar : obsVars) {
+			if (dbVar.equals(obsVar))
+				result.add(new FeatureMatch(i, obsVC, dbFeature));
+			i += 1;
+		}
+
+		return result;
+
+	}
+
+	/**
 	 * Pair genotypes of two {@link VariantContext}s based on their position, regardless of their genotype
 	 * 
 	 * In the end, all genotypes will be matched regardless of matching alleles, such that later the "best" (e.g., the
@@ -97,6 +126,36 @@ public final class AlleleMatcher {
 		return result;
 	}
 
+	/**
+	 * Pair genotypes of two {@link VariantContext}s based on their position, regardless of their genotype
+	 * 
+	 * In the end, all genotypes will be matched regardless of matching alleles, such that later the "best" (e.g., the
+	 * highest frequency one) can be used for annotating a variant.
+	 * 
+	 * @param obsVC
+	 *            {@link VariantContext} describing the observed variant
+	 * @param dbVC
+	 *            {@link VariantContext} describing the database variant
+	 * @return {@link Collection} of {@link GenotypeMatch}es for the two variants
+	 */
+	public Collection<FeatureMatch> positionOverlaps(VariantContext obsVC, TabixFeature dbFeature) {
+		List<FeatureMatch> result = new ArrayList<>();
+
+		// Get normalized description of all alternative observed and database alleles
+		Collection<VariantDescription> obsVars = ctxToVariants(obsVC);
+		VariantDescription dbVar = featureToVariant(dbFeature);
+
+		int i = 1; // excludes reference allele
+		for (VariantDescription obsVar : obsVars) {
+			if (dbVar.overlapsWith(obsVar))
+				result.add(new FeatureMatch(i, obsVC, dbFeature));
+
+			i += 1;
+		}
+
+		return result;
+	}
+
 	private Collection<VariantDescription> ctxToVariants(VariantContext vc) {
 		List<VariantDescription> vars = new ArrayList<>();
 		for (int i = 1; i < vc.getNAlleles(); ++i) {
@@ -105,9 +164,20 @@ public final class AlleleMatcher {
 			VariantDescription nd = normalizer.normalizeVariant(vd);
 			if (nd.getRef().isEmpty()) // is insertion
 				nd = normalizer.normalizeInsertion(vd);
-			vars.add(vd);
+			vars.add(nd);
 		}
 		return vars;
+	}
+
+	private VariantDescription featureToVariant(TabixFeature feature) {
+
+		VariantDescription vd = new VariantDescription(feature.getContig(), feature.getStart() - 1, feature.getRef(),
+				feature.getAlt());
+		VariantDescription nd = normalizer.normalizeVariant(vd);
+		if (nd.getRef().isEmpty()) // is insertion
+			nd = normalizer.normalizeInsertion(vd);
+
+		return nd;
 	}
 
 }

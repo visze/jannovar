@@ -13,11 +13,13 @@ public class TabixFeature implements Feature {
 
 	private String contig;
 	private int position;
-	private List<Allele> alleles;
+	private String ref;
+	private String alt;
 	private Map<String, String> attributes;
 
 	public TabixFeature(String contig, int position, String ref, String alt, Map<String, String> values) {
-		this.alleles = Arrays.asList(Allele.create(ref, true), Allele.create(alt, false));
+		this.ref = ref;
+		this.alt = alt;
 		this.position = position;
 		this.attributes = values;
 		this.contig = contig;
@@ -42,15 +44,24 @@ public class TabixFeature implements Feature {
 	public String getChr() {
 		return contig;
 	}
-
-	public VariantContext getVC() {
-		return new VariantContextBuilder().chr(contig).start(position).computeEndFromAlleles(alleles, position)
-				.alleles(alleles).attributes(attributes).make();
+	
+	/**
+	 * @return the ref
+	 */
+	public String getRef() {
+		return ref;
+	}
+	
+	/**
+	 * @return the alt
+	 */
+	public String getAlt() {
+		return alt;
 	}
 
 	@Override
 	public String toString() {
-		return contig + ":" + position + " [ alleles=" + alleles + ", attributes " + attributes + "]";
+		return contig + ":" + position + " [ ref=" + ref + ", alt=" + alt +", attributes=" + attributes + "]";
 	}
 
 }
