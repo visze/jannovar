@@ -110,9 +110,7 @@ public abstract class AbstractTabixDBAnnotationDriver<RecordType> implements DBA
 				if (options.isReportOverlapping() || options.isReportOverlappingAsMatching())
 					positionOverlaps.addAll(matcher.positionOverlaps(obsVC, dbFeature.getVC()));
 			}
-			
-			iter.close();
-			
+
 			// Merge records
 			HashMap<Integer, AnnotatingRecord<RecordType>> dbRecordsMatch = buildAnnotatingDBRecordsWrapper(
 					genotypeMatches);
