@@ -59,8 +59,19 @@ public class TabixAnnotationDriver extends AbstractTabixDBAnnotationDriver<Tabix
 						fields.put(token, list);
 
 					}
-					final TabixRecord record = new TabixRecord(current.getChrom(), current.getPos(), current.getRef(),
-							current.getAlt(), current.getFilter(), fields);
+					TabixRecordBuilder builder = new TabixRecordBuilder();
+					builder.setContig(current.getChrom());
+					builder.setPos(current.getPos());
+					builder.setRef(current.getRef());
+					ArrayList<String> alts = new ArrayList<>();
+					alts.addAll(current.getAlt());
+					builder.setAlt(alts);
+					ArrayList<String> filters = new ArrayList<>();
+					filters.addAll(current.getAlt());
+					builder.setAlt(filters);
+					builder.setFilter(filters);
+					builder.setFields(fields);
+					TabixRecord record = builder.build();
 					annotatingRecord.put(alleleNo, new AnnotatingRecord<>(record, matchToRecord.get(m).getAlleleNo()));
 				}
 			}

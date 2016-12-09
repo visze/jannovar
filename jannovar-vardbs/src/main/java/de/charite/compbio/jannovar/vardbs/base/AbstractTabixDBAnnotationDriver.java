@@ -153,7 +153,7 @@ public abstract class AbstractTabixDBAnnotationDriver<RecordType> implements DBA
 				matchToRecord.put(match,
 						new AnnotatingRecord<RecordType>(vcToRecord.convert(match.getDBVC()), match.getDbAllele()));
 		}
-
+		
 		return pickAnnotatingDBRecords(annotatingRecords, matchToRecord);
 	}
 
