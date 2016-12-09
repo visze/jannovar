@@ -13,7 +13,7 @@ public class TabixRecordBuilder {
 	/** Reference sequence */
 	private String ref;
 	/** Alternative alleles in cluster */
-	private ArrayList<String> alt;
+	private List<String> alt;
 	/** Filters, NC: inconsistent genotype submission for at least one sample */
 	private ArrayList<String> filter;
 
@@ -57,11 +57,11 @@ public class TabixRecordBuilder {
 		this.ref = ref;
 	}
 
-	public ArrayList<String> getAlt() {
+	public List<String> getAlt() {
 		return alt;
 	}
 
-	public void setAlt(ArrayList<String> alt) {
+	public void setAlt(List<String> alt) {
 		this.alt = alt;
 	}
 

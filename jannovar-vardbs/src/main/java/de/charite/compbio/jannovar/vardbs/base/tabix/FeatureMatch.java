@@ -1,4 +1,4 @@
-package de.charite.compbio.jannovar.vardbs.base;
+package de.charite.compbio.jannovar.vardbs.base.tabix;
 
 import htsjdk.variant.variantcontext.VariantContext;
 
@@ -28,6 +28,10 @@ public final class FeatureMatch {
 
 	public VariantContext getObsVC() {
 		return obsVC;
+	}
+	
+	public TabixFeature getDbFeature() {
+		return dbFeature;
 	}
 
 	@Override

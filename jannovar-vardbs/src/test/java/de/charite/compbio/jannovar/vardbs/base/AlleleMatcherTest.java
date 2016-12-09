@@ -13,6 +13,7 @@ import org.junit.Test;
 import com.google.common.io.Files;
 
 import de.charite.compbio.jannovar.utils.ResourceUtils;
+import de.charite.compbio.jannovar.vardbs.base.vcf.GenotypeMatch;
 import htsjdk.variant.variantcontext.VariantContext;
 import htsjdk.variant.vcf.VCFFileReader;
 

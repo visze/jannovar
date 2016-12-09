@@ -1,10 +1,15 @@
-package de.charite.compbio.jannovar.vardbs.base;
+package de.charite.compbio.jannovar.vardbs.base.vcf;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import de.charite.compbio.jannovar.vardbs.base.AlleleMatcher;
+import de.charite.compbio.jannovar.vardbs.base.AnnotatingRecord;
+import de.charite.compbio.jannovar.vardbs.base.DBAnnotationDriver;
+import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
+import de.charite.compbio.jannovar.vardbs.base.JannovarVarDBException;
 import htsjdk.samtools.util.CloseableIterator;
 import htsjdk.variant.variantcontext.VariantContext;
 import htsjdk.variant.vcf.VCFFileReader;

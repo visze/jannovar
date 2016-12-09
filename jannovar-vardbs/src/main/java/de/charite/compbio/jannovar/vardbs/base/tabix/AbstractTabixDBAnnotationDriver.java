@@ -1,4 +1,4 @@
-package de.charite.compbio.jannovar.vardbs.base;
+package de.charite.compbio.jannovar.vardbs.base.tabix;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -10,6 +10,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.zip.GZIPInputStream;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+
+import de.charite.compbio.jannovar.vardbs.base.AlleleMatcher;
+import de.charite.compbio.jannovar.vardbs.base.AnnotatingRecord;
+import de.charite.compbio.jannovar.vardbs.base.DBAnnotationDriver;
+import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
+import de.charite.compbio.jannovar.vardbs.base.JannovarVarDBException;
+import de.charite.compbio.jannovar.vardbs.base.vcf.GenotypeMatch;
+import de.charite.compbio.jannovar.vardbs.tabix.TabixRecord;
 import htsjdk.samtools.util.CloseableIterator;
 import htsjdk.tribble.FeatureReader;
 import htsjdk.tribble.TabixFeatureReader;
@@ -29,7 +39,7 @@ public abstract class AbstractTabixDBAnnotationDriver<RecordType> implements DBA
 	/** header fields contained in the tabix file */
 	protected final List<String> fields;
 	/** Helper for converting from VariantContex to DBSNP record */
-	protected final VariantContextToRecordConverter<RecordType> vcToRecord;
+	protected final TabixFeatureToRecordConverter<RecordType> featureToRecord;
 	/** Configuration */
 	protected final DBAnnotationOptions options;
 	/** VCFReader to use for loading the VCF records */
@@ -50,10 +60,10 @@ public abstract class AbstractTabixDBAnnotationDriver<RecordType> implements DBA
 	 *             on problems loading the reference FASTA/FAI file or incompatible dbSNP version
 	 */
 	public AbstractTabixDBAnnotationDriver(String tabixPath, String fastaPath, DBAnnotationOptions options,
-			VariantContextToRecordConverter<RecordType> vcToRecord) throws JannovarVarDBException {
+			TabixFeatureToRecordConverter<RecordType> featureToRecord) throws JannovarVarDBException {
 		this.tabixPath = tabixPath;
 		this.matcher = new AlleleMatcher(fastaPath);
-		this.vcToRecord = vcToRecord;
+		this.featureToRecord = featureToRecord;
 		this.fields = getFieldsFromHeader();
 		try {
 			this.tabixReader = new TabixFeatureReader<>(tabixPath, new TabixCodec(this.fields));
@@ -141,35 +151,40 @@ public abstract class AbstractTabixDBAnnotationDriver<RecordType> implements DBA
 	 * @return Resulting map from alternative allele ID (starting with 1) to the database record to use
 	 */
 	private HashMap<Integer, AnnotatingRecord<RecordType>> buildAnnotatingDBRecordsWrapper(
-			List<GenotypeMatch> genotypeMatches) {
-		// Collect annotating variants for each allele
-		HashMap<Integer, ArrayList<GenotypeMatch>> annotatingRecords = new HashMap<>();
-		HashMap<GenotypeMatch, AnnotatingRecord<RecordType>> matchToRecord = new HashMap<>();
-		for (GenotypeMatch match : genotypeMatches) {
+			List<FeatureMatch> featureMatches) {
+		// Collect features variants for each allele
+		Multimap<Integer, TabixFeature> featureRecords = HashMultimap.create();
+
+		for (FeatureMatch match : featureMatches) {
 			final int alleleNo = match.getObservedAllele();
-			annotatingRecords.putIfAbsent(alleleNo, new ArrayList<GenotypeMatch>());
-			annotatingRecords.get(alleleNo).add(match);
-			if (!matchToRecord.containsKey(match))
-				matchToRecord.put(match,
-						new AnnotatingRecord<RecordType>(vcToRecord.convert(match.getDBVC()), match.getDbAllele()));
+			featureRecords.put(alleleNo, match.getDbFeature());
 		}
-		
-		return pickAnnotatingDBRecords(annotatingRecords, matchToRecord);
+
+		HashMap<Integer, AnnotatingRecord<RecordType>> result = new HashMap<>();
+
+		for (final int alleleNo : featureRecords.keySet()) {
+			RecordType record = featureToRecord.convert(featureRecords.get(alleleNo));
+			AnnotatingRecord<RecordType> anno = new AnnotatingRecord<>(record, alleleNo);
+
+			result.put(alleleNo,anno);
+		}
+
+		return result;
 	}
 
-	/**
-	 * Pick annotating DB records
-	 * 
-	 * @param annotatingRecords
-	 *            Map of alternative allele number to genotype match
-	 * @param matchToRecord
-	 *            Mapping from alternative allel number to record
-	 * @return Mapping from alternative allele number to <code>RecordType</code>
-	 */
-	protected abstract HashMap<Integer, AnnotatingRecord<RecordType>> pickAnnotatingDBRecords(
-			HashMap<Integer, ArrayList<GenotypeMatch>> annotatingRecords,
-			HashMap<GenotypeMatch, AnnotatingRecord<RecordType>> matchToRecord);
-
+	// /**
+	// * Pick annotating DB records
+	// *
+	// * @param annotatingRecords
+	// * Map of alternative allele number to genotype match
+	// * @param matchToRecord
+	// * Mapping from alternative allel number to record
+	// * @return Mapping from alternative allele number to <code>RecordType</code>
+	// */
+	// protected abstract HashMap<Integer, AnnotatingRecord<RecordType>> pickAnnotatingDBRecords(
+	// HashMap<Integer, ArrayList<GenotypeMatch>> annotatingRecords,
+	// HashMap<GenotypeMatch, AnnotatingRecord<RecordType>> matchToRecord);
+	//
 	/**
 	 * Annotate the given {@link VariantContext} with the given database records
 	 * 

@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import de.charite.compbio.jannovar.vardbs.base.tabix.FeatureMatch;
+import de.charite.compbio.jannovar.vardbs.base.tabix.TabixFeature;
+import de.charite.compbio.jannovar.vardbs.base.vcf.GenotypeMatch;
 import htsjdk.variant.variantcontext.VariantContext;
 
 /**

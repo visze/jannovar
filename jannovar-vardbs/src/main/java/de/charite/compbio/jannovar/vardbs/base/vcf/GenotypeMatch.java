@@ -1,4 +1,4 @@
-package de.charite.compbio.jannovar.vardbs.base;
+package de.charite.compbio.jannovar.vardbs.base.vcf;
 
 import htsjdk.variant.variantcontext.VariantContext;
 

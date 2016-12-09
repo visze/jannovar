@@ -1,4 +1,4 @@
-package de.charite.compbio.jannovar.vardbs.base;
+package de.charite.compbio.jannovar.vardbs.base.tabix;
 
 import java.util.Arrays;
 import java.util.List;
@@ -57,6 +57,10 @@ public class TabixFeature implements Feature {
 	 */
 	public String getAlt() {
 		return alt;
+	}
+	
+	public Map<String, String> getAttributes() {
+		return attributes;
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import de.charite.compbio.jannovar.vardbs.base.VariantContextToRecordConverter;
+import de.charite.compbio.jannovar.vardbs.base.vcf.VariantContextToRecordConverter;
 import htsjdk.variant.variantcontext.Allele;
 import htsjdk.variant.variantcontext.VariantContext;
 

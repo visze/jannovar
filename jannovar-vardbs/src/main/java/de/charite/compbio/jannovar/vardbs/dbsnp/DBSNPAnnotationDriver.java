@@ -7,12 +7,12 @@ import java.util.Map.Entry;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
-import de.charite.compbio.jannovar.vardbs.base.AbstractVCFDBAnnotationDriver;
 import de.charite.compbio.jannovar.vardbs.base.AnnotatingRecord;
 import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
-import de.charite.compbio.jannovar.vardbs.base.GenotypeMatch;
 import de.charite.compbio.jannovar.vardbs.base.JannovarVarDBException;
 import de.charite.compbio.jannovar.vardbs.base.VCFHeaderExtender;
+import de.charite.compbio.jannovar.vardbs.base.vcf.AbstractVCFDBAnnotationDriver;
+import de.charite.compbio.jannovar.vardbs.base.vcf.GenotypeMatch;
 import htsjdk.variant.variantcontext.VariantContext;
 import htsjdk.variant.variantcontext.VariantContextBuilder;
 

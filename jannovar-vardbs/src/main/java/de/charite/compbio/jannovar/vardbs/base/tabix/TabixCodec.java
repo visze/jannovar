@@ -1,7 +1,7 @@
 /**
  * 
  */
-package de.charite.compbio.jannovar.vardbs.base;
+package de.charite.compbio.jannovar.vardbs.base.tabix;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

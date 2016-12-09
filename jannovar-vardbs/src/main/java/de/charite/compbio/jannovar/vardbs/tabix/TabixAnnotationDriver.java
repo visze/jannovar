@@ -11,12 +11,12 @@ import java.util.Set;
 
 import com.google.common.base.Joiner;
 
-import de.charite.compbio.jannovar.vardbs.base.AbstractTabixDBAnnotationDriver;
 import de.charite.compbio.jannovar.vardbs.base.AnnotatingRecord;
 import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
-import de.charite.compbio.jannovar.vardbs.base.GenotypeMatch;
 import de.charite.compbio.jannovar.vardbs.base.JannovarVarDBException;
 import de.charite.compbio.jannovar.vardbs.base.VCFHeaderExtender;
+import de.charite.compbio.jannovar.vardbs.base.tabix.AbstractTabixDBAnnotationDriver;
+import de.charite.compbio.jannovar.vardbs.base.vcf.GenotypeMatch;
 import htsjdk.variant.variantcontext.VariantContext;
 import htsjdk.variant.variantcontext.VariantContextBuilder;
 
@@ -32,52 +32,52 @@ public class TabixAnnotationDriver extends AbstractTabixDBAnnotationDriver<Tabix
 		super(tabixPath, fastaPath, options, new TabixEntryToRecordConverter());
 	}
 
-	@Override
-	protected HashMap<Integer, AnnotatingRecord<TabixRecord>> pickAnnotatingDBRecords(
-			HashMap<Integer, ArrayList<GenotypeMatch>> annotatingRecords,
-			HashMap<GenotypeMatch, AnnotatingRecord<TabixRecord>> matchToRecord) {
-		// Pick best annotation for each alternative allele
-		HashMap<Integer, AnnotatingRecord<TabixRecord>> annotatingRecord = new HashMap<>();
-		for (Entry<Integer, ArrayList<GenotypeMatch>> entry : annotatingRecords.entrySet()) {
-			final int alleleNo = entry.getKey();
-			for (GenotypeMatch m : entry.getValue()) {
-				if (!annotatingRecord.containsKey(alleleNo)) {
-					annotatingRecord.put(alleleNo, matchToRecord.get(m));
-				} else {
-					final TabixRecord current = annotatingRecord.get(alleleNo).getRecord();
-					final TabixRecord update = matchToRecord.get(m).getRecord();
-					Map<String, List<String>> fields = new HashMap<>();
-					Set<String> tokens = new HashSet<>();
-					tokens.addAll(current.getFields().keySet());
-					tokens.addAll(update.getFields().keySet());
-					for (String token : tokens) {
-						List<String> list = new ArrayList<>();
-						if (current.getFields().containsKey(token))
-							list.addAll(current.getFields().get(token));
-						if (current.getFields().containsKey(token))
-							list.addAll(current.getFields().get(token));
-						fields.put(token, list);
-
-					}
-					TabixRecordBuilder builder = new TabixRecordBuilder();
-					builder.setContig(current.getChrom());
-					builder.setPos(current.getPos());
-					builder.setRef(current.getRef());
-					ArrayList<String> alts = new ArrayList<>();
-					alts.addAll(current.getAlt());
-					builder.setAlt(alts);
-					ArrayList<String> filters = new ArrayList<>();
-					filters.addAll(current.getAlt());
-					builder.setAlt(filters);
-					builder.setFilter(filters);
-					builder.setFields(fields);
-					TabixRecord record = builder.build();
-					annotatingRecord.put(alleleNo, new AnnotatingRecord<>(record, matchToRecord.get(m).getAlleleNo()));
-				}
-			}
-		}
-		return annotatingRecord;
-	}
+//	@Override
+//	protected HashMap<Integer, AnnotatingRecord<TabixRecord>> pickAnnotatingDBRecords(
+//			HashMap<Integer, ArrayList<GenotypeMatch>> annotatingRecords,
+//			HashMap<GenotypeMatch, AnnotatingRecord<TabixRecord>> matchToRecord) {
+//		// Pick best annotation for each alternative allele
+//		HashMap<Integer, AnnotatingRecord<TabixRecord>> annotatingRecord = new HashMap<>();
+//		for (Entry<Integer, ArrayList<GenotypeMatch>> entry : annotatingRecords.entrySet()) {
+//			final int alleleNo = entry.getKey();
+//			for (GenotypeMatch m : entry.getValue()) {
+//				if (!annotatingRecord.containsKey(alleleNo)) {
+//					annotatingRecord.put(alleleNo, matchToRecord.get(m));
+//				} else {
+//					final TabixRecord current = annotatingRecord.get(alleleNo).getRecord();
+//					final TabixRecord update = matchToRecord.get(m).getRecord();
+//					Map<String, List<String>> fields = new HashMap<>();
+//					Set<String> tokens = new HashSet<>();
+//					tokens.addAll(current.getFields().keySet());
+//					tokens.addAll(update.getFields().keySet());
+//					for (String token : tokens) {
+//						List<String> list = new ArrayList<>();
+//						if (current.getFields().containsKey(token))
+//							list.addAll(current.getFields().get(token));
+//						if (current.getFields().containsKey(token))
+//							list.addAll(current.getFields().get(token));
+//						fields.put(token, list);
+//
+//					}
+//					TabixRecordBuilder builder = new TabixRecordBuilder();
+//					builder.setContig(current.getChrom());
+//					builder.setPos(current.getPos());
+//					builder.setRef(current.getRef());
+//					ArrayList<String> alts = new ArrayList<>();
+//					alts.addAll(current.getAlt());
+//					builder.setAlt(alts);
+//					ArrayList<String> filters = new ArrayList<>();
+//					filters.addAll(current.getAlt());
+//					builder.setAlt(filters);
+//					builder.setFilter(filters);
+//					builder.setFields(fields);
+//					TabixRecord record = builder.build();
+//					annotatingRecord.put(alleleNo, new AnnotatingRecord<>(record, matchToRecord.get(m).getAlleleNo()));
+//				}
+//			}
+//		}
+//		return annotatingRecord;
+//	}
 
 	@Override
 	public VCFHeaderExtender constructVCFHeaderExtender() {
