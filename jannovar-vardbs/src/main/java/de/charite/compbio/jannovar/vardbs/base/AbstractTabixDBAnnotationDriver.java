@@ -102,13 +102,13 @@ public abstract class AbstractTabixDBAnnotationDriver<RecordType> implements DBA
 		try (CloseableIterator<TabixFeature> iter = tabixReader.query(obsVC.getContig(), obsVC.getStart(),
 				obsVC.getEnd())) {
 			// Fetch all overlapping and matching genotypes from database and pair them with the correct allele from vc.
-			List<GenotypeMatch> genotypeMatches = new ArrayList<>();
-			List<GenotypeMatch> positionOverlaps = new ArrayList<>();
+			List<FeatureMatch> genotypeMatches = new ArrayList<>();
+			List<FeatureMatch> positionOverlaps = new ArrayList<>();
 			while (iter.hasNext()) {
 				final TabixFeature dbFeature = iter.next();
-				genotypeMatches.addAll(matcher.matchGenotypes(obsVC, dbFeature.getVC()));
+				genotypeMatches.addAll(matcher.matchGenotypes(obsVC, dbFeature));
 				if (options.isReportOverlapping() || options.isReportOverlappingAsMatching())
-					positionOverlaps.addAll(matcher.positionOverlaps(obsVC, dbFeature.getVC()));
+					positionOverlaps.addAll(matcher.positionOverlaps(obsVC, dbFeature));
 			}
 
 			// Merge records
