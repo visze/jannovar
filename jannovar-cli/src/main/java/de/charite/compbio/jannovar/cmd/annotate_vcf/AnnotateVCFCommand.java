@@ -29,6 +29,7 @@ import htsjdk.samtools.SAMSequenceDictionary;
 import htsjdk.variant.variantcontext.VariantContext;
 import htsjdk.variant.vcf.VCFFileReader;
 import htsjdk.variant.vcf.VCFHeader;
+import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 
 /**
@@ -115,6 +116,16 @@ public class AnnotateVCFCommand extends JannovarAnnotationCommand {
 						.constructUK10K(options.pathVCFUK10K, options.pathFASTARef, uk10KOptions);
 				uk10kAnno.extendHeader(vcfHeader);
 				stream = stream.map(uk10kAnno::annotateVariantContext);
+			}
+			
+			// If configured, annotate using 1KG VCF file (extend header to use for writing out)
+			if (options.pathVCF1KG != null) {
+				DBAnnotationOptions g1kOptions = DBAnnotationOptions.createDefaults();
+				g1kOptions.setIdentifierPrefix(options.prefix1KG);
+				DBVariantContextAnnotator g1kAnno = new DBVariantContextAnnotatorFactory()
+						.construct1KG(options.pathVCF1KG, options.pathFASTARef, g1kOptions);
+				g1kAnno.extendHeader(vcfHeader);
+				stream = stream.map(g1kAnno::annotateVariantContext);
 			}
 
 			// If configured, annotate using tabix files (extend header to use for writing out)
