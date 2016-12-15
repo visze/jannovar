@@ -117,7 +117,7 @@ public class AnnotateVCFCommand extends JannovarAnnotationCommand {
 				uk10kAnno.extendHeader(vcfHeader);
 				stream = stream.map(uk10kAnno::annotateVariantContext);
 			}
-			
+
 			// If configured, annotate using 1KG VCF file (extend header to use for writing out)
 			if (options.pathVCF1KG != null) {
 				DBAnnotationOptions g1kOptions = DBAnnotationOptions.createDefaults();
@@ -139,6 +139,17 @@ public class AnnotateVCFCommand extends JannovarAnnotationCommand {
 					tabixAnno.extendHeader(vcfHeader);
 					stream = stream.map(tabixAnno::annotateVariantContext);
 				}
+
+			}
+
+			// If configured, annotate using ReMM file
+			if (!options.pathReMM.isEmpty()) {
+				DBAnnotationOptions remmOptions = DBAnnotationOptions.createDefaults();
+				remmOptions.setIdentifierPrefix(options.prefixReMM);
+				DBVariantContextAnnotator tabixAnno = new DBVariantContextAnnotatorFactory()
+						.constructReMM(options.pathReMM, remmOptions);
+				tabixAnno.extendHeader(vcfHeader);
+				stream = stream.map(tabixAnno::annotateVariantContext);
 
 			}
 

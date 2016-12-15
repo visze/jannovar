@@ -61,12 +61,18 @@ public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
 
 	/** Prefix to use for Tabix INFO Fields */
 	public List<String> prefixTabix;
-	
+
 	/** Path to 1KG VCF file to use for the annotation */
 	public String pathVCF1KG;
-	
+
 	/** Prefix to use for 1KG VCF INFO Fields */
 	public String prefix1KG;
+
+	/** Path to ReMM file to use for the annotation */
+	public String pathReMM;
+
+	/** Prefix to use for ReMM VCF INFO Fields */
+	public String prefixReMM;
 
 	/**
 	 * Setup {@link ArgumentParser}
@@ -113,6 +119,10 @@ public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
 				.required(false);
 		annotationGroup.addArgument("--1kg-prefix").help("Prefix for 1KG annotations").setDefault("1KG_")
 				.required(false);
+		annotationGroup.addArgument("--remm-tabix").help("Path to ReMM tabix file, activates ReMM annotation")
+				.nargs("?").required(false);
+		annotationGroup.addArgument("--remm-prefix").help("Prefix for ReMM annotations").setDefault("REMM")
+				.required(false);
 		annotationGroup.addArgument("--tabix")
 				.help("Path to tabix file(s), activates TABIX annotation with ref and alts")
 				.setDefault(new ArrayList<>()).nargs("*").required(false);
@@ -153,6 +163,8 @@ public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
 		prefix1KG = args.getString("1kg_prefix");
 		pathTabix = args.getList("tabix");
 		prefixTabix = args.getList("tabix_prefix");
+		pathReMM = args.getString("remm-tabix");
+		prefixReMM = args.getString("remm_prefix");
 
 		if (pathFASTARef == null && (pathVCFDBSNP != null || pathVCFExac != null || pathVCFUK10K != null
 				|| pathVCF1KG != null || pathTabix != null))
