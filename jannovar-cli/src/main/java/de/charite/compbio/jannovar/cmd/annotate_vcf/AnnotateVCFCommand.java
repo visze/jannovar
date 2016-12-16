@@ -2,8 +2,11 @@ package de.charite.compbio.jannovar.cmd.annotate_vcf;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 
 import de.charite.compbio.jannovar.JannovarException;
@@ -29,7 +32,6 @@ import htsjdk.samtools.SAMSequenceDictionary;
 import htsjdk.variant.variantcontext.VariantContext;
 import htsjdk.variant.vcf.VCFFileReader;
 import htsjdk.variant.vcf.VCFHeader;
-import net.sourceforge.argparse4j.inf.ArgumentParserException;
 import net.sourceforge.argparse4j.inf.Namespace;
 
 /**
@@ -75,10 +77,15 @@ public class AnnotateVCFCommand extends JannovarAnnotationCommand {
 		try (VCFFileReader vcfReader = new VCFFileReader(new File(vcfPath), false)) {
 			if (this.options.getVerbosity() >= 1) {
 				final SAMSequenceDictionary seqDict = VCFFileReader.getSequenceDictionary(new File(vcfPath));
-				final GenomeRegionListFactoryFromSAMSequenceDictionary factory = new GenomeRegionListFactoryFromSAMSequenceDictionary();
-				this.progressReporter = new ProgressReporter(factory.construct(seqDict), 60);
-				this.progressReporter.printHeader();
-				this.progressReporter.start();
+				if (seqDict != null) {
+					final GenomeRegionListFactoryFromSAMSequenceDictionary factory = new GenomeRegionListFactoryFromSAMSequenceDictionary();
+					this.progressReporter = new ProgressReporter(factory.construct(seqDict), 60);
+					this.progressReporter.printHeader();
+					this.progressReporter.start();
+				} else {
+					System.err.println("Progress reporting does not work because VCF file is missing the contig "
+							+ "lines in the header.");
+				}
 			}
 
 			VCFHeader vcfHeader = vcfReader.getFileHeader();
@@ -211,7 +218,7 @@ public class AnnotateVCFCommand extends JannovarAnnotationCommand {
 			final Pedigree pedigree = new Pedigree(pedContents, pedContents.getIndividuals().get(0).getPedigree());
 			checkPedigreeCompatibility(pedigree, writer.getVCFHeader());
 			final GeneWiseMendelianAnnotationProcessor mendelProcessor = new GeneWiseMendelianAnnotationProcessor(
-					pedigree, jannovarData, writer.getVCFHeader().getSequenceDictionary(), vc -> writer.put(vc));
+					pedigree, jannovarData, vc -> writer.put(vc));
 			return new CoordinateSortingChecker(mendelProcessor);
 		} else {
 			return new ConsumerProcessor(vc -> writer.put(vc));
@@ -230,8 +237,12 @@ public class AnnotateVCFCommand extends JannovarAnnotationCommand {
 	 */
 	private void checkPedigreeCompatibility(Pedigree pedigree, VCFHeader vcfHeader)
 			throws IncompatiblePedigreeException {
-		if (!pedigree.getNames().containsAll(vcfHeader.getGenotypeSamples()))
-			throw new IncompatiblePedigreeException("The VCF file is not compatible with the pedigree!");
+		List<String> missing = vcfHeader.getGenotypeSamples().stream().filter(x -> !pedigree.getNames().contains(x))
+				.collect(Collectors.toList());
+		if (!missing.isEmpty())
+			throw new IncompatiblePedigreeException(
+					"The VCF file has the following sample names not present in Pedigree: "
+							+ Joiner.on(", ").join(missing));
 	}
 
 }

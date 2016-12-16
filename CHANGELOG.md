@@ -2,12 +2,24 @@
 
 ## develop
 
-## jannovar-cli
+### jannovar-core
 
+* `GenotypeCalls.getGenotypeForSample()` returns a "no-call" genotype now instead of `null`
+
+### jannovar-htsjdk
+
+* fix to annotation with compatible mode of inheritance (#289)
+
+### jannovar-cli
+
+* removing requirement for proper contig `contig` lines in gene-wise gene annotation
+* fixing NPE in the case of no `contig` lines
+* improving error message on samples in VCF file that are not in pedigree
+* fix to annotation with compatible mode of inheritance (#289)
 * better overview on CLI help message
 * if ref-fasta is not set properly a nicer error message will be shown.
 
-## jannovar-vardbs
+### jannovar-vardbs
 
 * Fixing bug with problems of unmodifieable Attributes.
 
