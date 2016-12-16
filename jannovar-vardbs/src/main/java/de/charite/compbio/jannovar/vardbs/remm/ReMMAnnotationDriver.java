@@ -3,6 +3,7 @@ package de.charite.compbio.jannovar.vardbs.remm;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import de.charite.compbio.jannovar.vardbs.base.DBAnnotationDriver;
 import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
@@ -54,12 +55,12 @@ public class ReMMAnnotationDriver implements DBAnnotationDriver {
 		List<Double> lst = new ArrayList<>();
 		for (int i = 1; i < vc.getAlleles().size(); i++) {
 			int altLength = vc.getAlleles().get(i).length();
-			Double max = 0.0;
+			Optional<Double> max;
 			if (refLength < altLength) {
 				// be careful with AT to ATT
 				try (CloseableTribbleIterator<ReMMFeature> iter = remmReader.query(vc.getContig(),
-						vc.getStart() + altLength - 1, vc.getEnd() + 1)) {
-					max = iter.stream().map(f -> f.getScore()).max(Double::compare).get();
+						vc.getStart() + refLength - 1, vc.getEnd() + 1)) {
+					max = iter.stream().map(f -> f.getScore()).max(Double::compare);
 
 				} catch (IOException e) {
 					throw new RuntimeException("Cannot query ReMM position" + vc.toString(), e);
@@ -67,7 +68,7 @@ public class ReMMAnnotationDriver implements DBAnnotationDriver {
 			} else if (refLength > altLength) {
 				try (CloseableTribbleIterator<ReMMFeature> iter = remmReader.query(vc.getContig(),
 						vc.getStart() + altLength, vc.getEnd())) {
-					max = iter.stream().map(f -> f.getScore()).max(Double::compare).get();
+					max = iter.stream().map(f -> f.getScore()).max(Double::compare);
 
 				} catch (IOException e) {
 					throw new RuntimeException("Cannot query ReMM position" + vc.toString(), e);
@@ -75,19 +76,22 @@ public class ReMMAnnotationDriver implements DBAnnotationDriver {
 			} else {
 				try (CloseableTribbleIterator<ReMMFeature> iter = remmReader.query(vc.getContig(), vc.getStart(),
 						vc.getEnd())) {
-					max = iter.stream().map(f -> f.getScore()).max(Double::compare).get();
+					max = iter.stream().map(f -> f.getScore()).max(Double::compare);
 
 				} catch (IOException e) {
 					throw new RuntimeException("Cannot query ReMM position" + vc.toString(), e);
 				}
 			}
-			lst.add(max);
+			if (max.isPresent())
+				lst.add(max.get());
+			else
+				lst.add(0.0);
 		}
 		
 		VariantContextBuilder builder = new VariantContextBuilder(vc);
 		builder.attribute(options.getVCFIdentifierPrefix(), lst);
 
-		return vc;
+		return builder.make();
 
 	}
 

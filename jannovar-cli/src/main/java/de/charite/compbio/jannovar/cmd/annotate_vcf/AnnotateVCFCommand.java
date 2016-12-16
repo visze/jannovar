@@ -143,7 +143,7 @@ public class AnnotateVCFCommand extends JannovarAnnotationCommand {
 			}
 
 			// If configured, annotate using ReMM file
-			if (!options.pathReMM.isEmpty()) {
+			if (options.pathReMM != null) {
 				DBAnnotationOptions remmOptions = DBAnnotationOptions.createDefaults();
 				remmOptions.setIdentifierPrefix(options.prefixReMM);
 				DBVariantContextAnnotator tabixAnno = new DBVariantContextAnnotatorFactory()

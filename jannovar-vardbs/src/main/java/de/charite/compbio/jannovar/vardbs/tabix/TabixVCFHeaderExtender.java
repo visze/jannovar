@@ -36,8 +36,8 @@ public class TabixVCFHeaderExtender extends VCFHeaderExtender {
 
 	public void addHeadersInfixes(VCFHeader header, String prefix, String infix, String note) {
 		for (String token : headers) {
-			VCFInfoHeaderLine line = new VCFInfoHeaderLine(prefix + infix + headers, 1, VCFHeaderLineType.String,
-					"Number of chromosomes with coverage in TABIX" + note);
+			VCFInfoHeaderLine line = new VCFInfoHeaderLine(prefix + infix + token, 1, VCFHeaderLineType.String,
+					"Annotation with TABIX token " + token + note);
 			header.addMetaDataLine(line);
 		}
 	}

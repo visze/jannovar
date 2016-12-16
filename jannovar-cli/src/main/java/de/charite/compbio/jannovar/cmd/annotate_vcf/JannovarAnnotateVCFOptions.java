@@ -163,11 +163,11 @@ public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
 		prefix1KG = args.getString("1kg_prefix");
 		pathTabix = args.getList("tabix");
 		prefixTabix = args.getList("tabix_prefix");
-		pathReMM = args.getString("remm-tabix");
+		pathReMM = args.getString("remm_tabix");
 		prefixReMM = args.getString("remm_prefix");
 
 		if (pathFASTARef == null && (pathVCFDBSNP != null || pathVCFExac != null || pathVCFUK10K != null
-				|| pathVCF1KG != null || pathTabix != null))
+				|| pathVCF1KG != null || !pathTabix.isEmpty()))
 			throw new CommandLineParsingException(
 					"Command --ref-fasta required when using dbSNP, ExAC, or UK10K annotations.");
 	}

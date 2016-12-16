@@ -66,7 +66,7 @@ public class ReMMCodec extends AsciiFeatureCodec<ReMMFeature> {
 
 		// The first 3 columns are non optional for this Tabix
 
-		if (tokenCount < 4) {
+		if (tokenCount < 3) {
 			return null;
 		}
 
