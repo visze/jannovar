@@ -1,10 +1,6 @@
 [![Build Status](https://travis-ci.org/charite/jannovar.svg?branch=master)](https://travis-ci.org/charite/jannovar)
 [![Documentation](https://readthedocs.org/projects/jannovar/badge/?version=master)](http://jannovar.readthedocs.org/)
-<<<<<<< HEAD
-[![API Docs](https://img.shields.io/badge/api-v0.20-blue.svg?style=flat)](javadoc.io/doc/de.charite.compbio/jannovar-core/0.20)
-=======
-[![API Docs](https://img.shields.io/badge/api-v0.19-blue.svg?style=flat)](http://javadoc.io/doc/de.charite.compbio/jannovar-core/0.20)
->>>>>>> refs/heads/hotfix/unmodifiableMapWhenErrorAnnotation
+[![API Docs](https://img.shields.io/badge/api-v0.20-blue.svg?style=flat)](https://javadoc.io/doc/de.charite.compbio/jannovar-core/0.20)
 
 Jannovar
 ========
