@@ -24,6 +24,7 @@ import htsjdk.samtools.util.CloseableIterator;
 import htsjdk.tribble.FeatureReader;
 import htsjdk.tribble.TabixFeatureReader;
 import htsjdk.variant.variantcontext.VariantContext;
+import htsjdk.variant.variantcontext.VariantContextBuilder;
 
 /**
  * Abstract base class for annotation based on VCF files.
@@ -109,16 +110,18 @@ public abstract class AbstractTabixDBAnnotationDriver<RecordType> implements DBA
 
 	@Override
 	public VariantContext annotateVariantContext(VariantContext obsVC) {
-		try (CloseableIterator<TabixFeature> iter = tabixReader.query(obsVC.getContig(), obsVC.getStart(),
-				obsVC.getEnd())) {
+		VariantContext contigVC = new VariantContextBuilder(obsVC).chr(obsVC.getContig().replace("chr", "")).make();
+		try (CloseableIterator<TabixFeature> iter = tabixReader.query(contigVC.getContig(),
+				obsVC.getStart(), obsVC.getEnd())) {
 			// Fetch all overlapping and matching genotypes from database and pair them with the correct allele from vc.
 			List<FeatureMatch> genotypeMatches = new ArrayList<>();
 			List<FeatureMatch> positionOverlaps = new ArrayList<>();
+			
 			while (iter.hasNext()) {
 				final TabixFeature dbFeature = iter.next();
-				genotypeMatches.addAll(matcher.matchGenotypes(obsVC, dbFeature));
+				genotypeMatches.addAll(matcher.matchGenotypes(contigVC, dbFeature));
 				if (options.isReportOverlapping() || options.isReportOverlappingAsMatching())
-					positionOverlaps.addAll(matcher.positionOverlaps(obsVC, dbFeature));
+					positionOverlaps.addAll(matcher.positionOverlaps(contigVC, dbFeature));
 			}
 
 			// Merge records
@@ -166,7 +169,7 @@ public abstract class AbstractTabixDBAnnotationDriver<RecordType> implements DBA
 			RecordType record = featureToRecord.convert(featureRecords.get(alleleNo));
 			AnnotatingRecord<RecordType> anno = new AnnotatingRecord<>(record, alleleNo);
 
-			result.put(alleleNo,anno);
+			result.put(alleleNo, anno);
 		}
 
 		return result;
