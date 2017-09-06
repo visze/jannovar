@@ -358,6 +358,8 @@ public final class Annotation implements VariantDescription, Comparable<Annotati
 
 	@Override
 	public int compareTo(Annotation other) {
+		if (other == null)
+			return 1;
 		if (getMostPathogenicVarType() == null && getMostPathogenicVarType() == other.getMostPathogenicVarType())
 			return 0;
 		else if (other.getMostPathogenicVarType() == null)

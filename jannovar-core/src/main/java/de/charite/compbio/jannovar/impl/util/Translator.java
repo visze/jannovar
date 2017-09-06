@@ -90,7 +90,7 @@ public final class Translator {
 	private String translateDNA(String dnaseq, ImmutableMap<String, String> codonTable) {
 		StringBuilder aminoAcidSeq = new StringBuilder();
 		int len = dnaseq.length();
-		if (!(len % 3 == 0)) {
+		if (len % 3 != 0) {
 			len = len - (len % 3);
 			/* this forces len to be a multiple of 3. */
 			// String err =

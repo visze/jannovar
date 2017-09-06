@@ -20,10 +20,6 @@ import de.charite.compbio.jannovar.hgvs.parser.Antlr4HGVSParser.Hgvs_variantCont
  */
 public class HGVSParsingTestBase {
 
-	public HGVSParsingTestBase() {
-		super();
-	}
-
 	public static void setLogLevel(Level level) {
 		LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
 		Configuration conf = ctx.getConfiguration();

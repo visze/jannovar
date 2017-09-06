@@ -86,7 +86,7 @@ public class AnnotatePositionCommand extends JannovarAnnotationCommand {
 			effect = textGenerator.buildEffectText();
 			messages = textGenerator.buildMessages();
 			
-			System.out.println(String.format("%s\t%s\t%s\t%s", chromosomalChange.toString(), effect, annotation, messages));
+			System.out.println(String.format("%s\t%s\t%s\t%s", chromosomalChange, effect, annotation, messages));
 		}
 	}
 
