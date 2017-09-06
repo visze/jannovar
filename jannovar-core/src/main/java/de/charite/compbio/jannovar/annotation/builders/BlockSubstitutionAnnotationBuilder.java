@@ -105,35 +105,35 @@ public final class BlockSubstitutionAnnotationBuilder extends AnnotationBuilder 
 	 * We use this helper class to simplify the access to the parameters such as {@link #wtCDSSeq} etc.
 	 */
 	private class CDSExonicAnnotationBuilder {
-		final GenomeInterval changeInterval;
+		private final GenomeInterval changeInterval;
 
-		final Translator t = Translator.getTranslator();
+		private final Translator t = Translator.getTranslator();
 
-		final String wtCDSSeq;
-		final String varCDSSeq;
-		final int delFrameShift;
+		private final String wtCDSSeq;
+		private final String varCDSSeq;
+		private final int delFrameShift;
 
-		final String wtAASeq;
-		final String varAASeq;
-		final int varAAStopPos;
+		private final String wtAASeq;
+		private final String varAASeq;
+		private final int varAAStopPos;
 
 		// TODO(holtgrem): Fix "value not used" variable warning by removing?
-		final CDSPosition refChangeBeginPos;
+		private final CDSPosition refChangeBeginPos;
 		@SuppressWarnings("unused")
-		final CDSPosition refChangeLastPos;
-		final CDSPosition varChangeBeginPos;
+		private final CDSPosition refChangeLastPos;
+		private final CDSPosition varChangeBeginPos;
 		@SuppressWarnings("unused")
-		final CDSPosition varChangeLastPos;
+		private final CDSPosition varChangeLastPos;
 
 		// We keep the following three variables as state of the algorithm since we do not have easy-to-use triples in
 		// Java.
 
 		// the variant types, updated in handleFrameShiftCase() and handleNonFrameShiftCase()
-		ArrayList<VariantEffect> varTypes = new ArrayList<VariantEffect>();
+		private ArrayList<VariantEffect> varTypes = new ArrayList<VariantEffect>();
 		// the amino acid change, updated in handleFrameShiftCase() and handleNonFrameShiftCase()
-		AminoAcidChange aaChange;
+		private AminoAcidChange aaChange;
 		// the predicted protein change, updated in handleFrameShiftCase() and handleNonFrameShiftCase()
-		ProteinChange proteinChange;
+		private ProteinChange proteinChange;
 
 		public CDSExonicAnnotationBuilder() {
 			this.changeInterval = change.getGenomeInterval();

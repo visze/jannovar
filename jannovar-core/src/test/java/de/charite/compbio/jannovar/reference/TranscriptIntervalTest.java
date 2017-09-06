@@ -12,13 +12,13 @@ public class TranscriptIntervalTest {
 	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 
 	/** transcript builder for the forward strand */
-	TranscriptModelBuilder builderForward;
+	private TranscriptModelBuilder builderForward;
 	/** transcript builder for the reverse strand */
-	TranscriptModelBuilder builderReverse;
+	protected TranscriptModelBuilder builderReverse;
 	/** transcript info for the forward strand */
-	TranscriptModel infoForward;
+	private TranscriptModel infoForward;
 	/** transcript info for the reverse strand */
-	TranscriptModel infoReverse;
+	protected TranscriptModel infoReverse;
 
 	@Before
 	public void setUp() {

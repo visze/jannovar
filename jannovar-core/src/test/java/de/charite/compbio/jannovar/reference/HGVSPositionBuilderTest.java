@@ -12,17 +12,17 @@ public class HGVSPositionBuilderTest {
 	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 
 	/** transcript on forward strand */
-	TranscriptModelBuilder transcriptForward;
+	private TranscriptModelBuilder transcriptForward;
 	/** transcript on reverse strand */
-	TranscriptModelBuilder transcriptReverse;
+	private TranscriptModelBuilder transcriptReverse;
 	/** non-coding transcript on forward strand */
-	TranscriptModelBuilder ncTranscriptForward;
+	private TranscriptModelBuilder ncTranscriptForward;
 	/** transcript info on forward strand */
-	TranscriptModel infoForward;
+	private TranscriptModel infoForward;
 	/** transcript info on reverse strand */
-	TranscriptModel infoReverse;
+	private TranscriptModel infoReverse;
 	/** non-coding transcript info on forward strand */
-	TranscriptModel ncInfoForward;
+	private TranscriptModel ncInfoForward;
 
 	@Before
 	public void setUp() throws Exception {

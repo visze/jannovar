@@ -14,8 +14,8 @@ import java.io.File;
  */
 public class GenericVCFHeaderExtender extends VCFHeaderExtender {
 
-	GenericVCFAnnotationOptions genericVcfOptions;
-	VCFHeader fileHeader;
+	private GenericVCFAnnotationOptions genericVcfOptions;
+	private VCFHeader fileHeader;
 
 	public GenericVCFHeaderExtender(GenericVCFAnnotationOptions options) {
 		super(options);

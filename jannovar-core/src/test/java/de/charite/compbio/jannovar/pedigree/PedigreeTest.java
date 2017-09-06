@@ -20,7 +20,7 @@ import de.charite.compbio.jannovar.pedigree.Sex;
  */
 public class PedigreeTest {
 
-	PedFileContents pedFileContents;
+	private PedFileContents pedFileContents;
 
 	@Before
 	public void setUp() {

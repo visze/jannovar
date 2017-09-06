@@ -14,11 +14,11 @@ package de.charite.compbio.jannovar.reference;
 final class VariantDataCorrector {
 
 	/** The reference characters after correction. */
-	String ref;
+	private String ref;
 	/** The alt bases after correction. */
-	String alt;
+	private String alt;
 	/** The position after correction. */
-	int position;
+	private int position;
 
 	/** Initialize from triple and immediately correct. */
 	public VariantDataCorrector(String ref, String alt, int position) {
@@ -51,5 +51,27 @@ final class VariantDataCorrector {
 			xdi += 1;
 		ref = xdi == 0 ? "" : ref.substring(0, xdi);
 		alt = xdi - diff == 0 ? "" : alt.substring(0, xdi - diff);
+	}
+	
+	/**
+	 * Getter for {@link ref}
+	 * @return the corrected reference
+	 */
+	public String getRef() {
+		return ref;
+	}
+	/**
+	 * Getter for {@link alt}
+	 * @return the corrected alternative
+	 */
+	public String getAlt() {
+		return alt;
+	}
+	/**
+	 * Getter for {@link position}
+	 * @return the corrected position
+	 */
+	public int getPosition() {
+		return position;
 	}
 }

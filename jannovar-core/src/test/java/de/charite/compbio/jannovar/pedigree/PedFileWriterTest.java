@@ -19,7 +19,7 @@ import de.charite.compbio.jannovar.pedigree.Sex;
 
 public class PedFileWriterTest {
 
-	File tmpFile;
+	private File tmpFile;
 
 	@Before
 	public void setUp() throws IOException {

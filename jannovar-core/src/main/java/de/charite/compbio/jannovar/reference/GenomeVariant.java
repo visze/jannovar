@@ -48,10 +48,10 @@ public final class GenomeVariant implements VariantDescription {
 		}
 
 		VariantDataCorrector corr = new VariantDataCorrector(ref, alt, pos.getPos());
-		this.pos = new GenomePosition(pos.getRefDict(), pos.getStrand(), pos.getChr(), corr.position,
+		this.pos = new GenomePosition(pos.getRefDict(), pos.getStrand(), pos.getChr(), corr.getPosition(),
 				PositionType.ZERO_BASED);
-		this.ref = corr.ref;
-		this.alt = corr.alt;
+		this.ref = corr.getRef();
+		this.alt = corr.getAlt();
 	}
 
 	/**
@@ -76,11 +76,11 @@ public final class GenomeVariant implements VariantDescription {
 		// Correct variant data.
 		VariantDataCorrector corr = new VariantDataCorrector(ref, alt, pos.getPos());
 		if (strand == pos.getStrand()) {
-			this.ref = corr.ref;
-			this.alt = corr.alt;
+			this.ref = corr.getRef();
+			this.alt = corr.getAlt();
 		} else {
-			this.ref = DNAUtils.reverseComplement(corr.ref);
-			this.alt = DNAUtils.reverseComplement(corr.alt);
+			this.ref = DNAUtils.reverseComplement(corr.getRef());
+			this.alt = DNAUtils.reverseComplement(corr.getAlt());
 		}
 
 		int delta = 0;
@@ -89,7 +89,7 @@ public final class GenomeVariant implements VariantDescription {
 		else if (strand != pos.getStrand() /* && ref.length() != 0 */)
 			delta = ref.length() - 1;
 
-		this.pos = new GenomePosition(pos.getRefDict(), pos.getStrand(), pos.getChr(), corr.position,
+		this.pos = new GenomePosition(pos.getRefDict(), pos.getStrand(), pos.getChr(), corr.getPosition(),
 				PositionType.ZERO_BASED).shifted(delta).withStrand(strand);
 	}
 

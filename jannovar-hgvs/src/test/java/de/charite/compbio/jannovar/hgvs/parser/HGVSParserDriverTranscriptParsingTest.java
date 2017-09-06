@@ -13,7 +13,7 @@ import de.charite.compbio.jannovar.hgvs.nts.variant.SingleAlleleNucleotideVarian
  */
 public class HGVSParserDriverTranscriptParsingTest {
 
-	HGVSParser driver;
+	private HGVSParser driver;
 
 	@Before
 	public void setUp() throws Exception {

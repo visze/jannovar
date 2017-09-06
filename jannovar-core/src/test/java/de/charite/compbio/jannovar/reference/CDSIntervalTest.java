@@ -14,16 +14,16 @@ import de.charite.compbio.jannovar.reference.TranscriptModelBuilder;
 public class CDSIntervalTest {
 
 	/** this test uses this static hg19 reference dictionary */
-	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
+	private static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 
 	/** transcript builder for the forward strand */
-	TranscriptModelBuilder builderForward;
+	private TranscriptModelBuilder builderForward;
 	/** transcript builder for the reverse strand */
-	TranscriptModelBuilder builderReverse;
+	protected TranscriptModelBuilder builderReverse;
 	/** transcript info for the forward strand */
-	TranscriptModel infoForward;
+	private TranscriptModel infoForward;
 	/** transcript info for the reverse strand */
-	TranscriptModel infoReverse;
+	protected TranscriptModel infoReverse;
 
 	@Before
 	public void setUp() {

@@ -18,7 +18,7 @@ import htsjdk.variant.variantcontext.VariantContext;
 public class CoordinateSortingChecker implements VariantContextProcessor {
 
 	/** Next pipeline step */
-	VariantContextProcessor sink;
+	private VariantContextProcessor sink;
 
 	/** set of seen chromosome names */
 	final private HashSet<String> seenChromosomes = new HashSet<String>();

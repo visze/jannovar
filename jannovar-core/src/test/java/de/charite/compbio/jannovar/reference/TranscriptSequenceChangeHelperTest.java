@@ -12,24 +12,24 @@ public class TranscriptSequenceChangeHelperTest {
 	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 
 	/** transcript builder for the forward strand */
-	TranscriptModelBuilder builderForward;
+	private TranscriptModelBuilder builderForward;
 	/** transcript info for the forward strand */
-	TranscriptModel infoForward;
+	private TranscriptModel infoForward;
 
 	/** projector helper for forward strand transcript info */
-	TranscriptProjectionDecorator projectorForward;
+	private TranscriptProjectionDecorator projectorForward;
 	/** the helper under tests for forward strand */
-	TranscriptSequenceChangeHelper helperForward;
+	private TranscriptSequenceChangeHelper helperForward;
 
 	/** transcript builder for the forward strand */
-	TranscriptModelBuilder builderReverse;
+	private TranscriptModelBuilder builderReverse;
 	/** transcript info for the forward strand */
-	TranscriptModel infoReverse;
+	private TranscriptModel infoReverse;
 
 	/** projector helper for forward strand transcript info */
-	TranscriptProjectionDecorator projectorReverse;
+	private TranscriptProjectionDecorator projectorReverse;
 	/** the helper under tests for forward strand */
-	TranscriptSequenceChangeHelper helperReverse;
+	private TranscriptSequenceChangeHelper helperReverse;
 
 	@Before
 	public void setUp() {

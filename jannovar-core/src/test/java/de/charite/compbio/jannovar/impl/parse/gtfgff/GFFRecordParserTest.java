@@ -11,7 +11,7 @@ import org.junit.Assert;
 
 public class GFFRecordParserTest {
 
-	String line;
+	private String line;
 
 	@Before
 	public void setUp() throws Exception {

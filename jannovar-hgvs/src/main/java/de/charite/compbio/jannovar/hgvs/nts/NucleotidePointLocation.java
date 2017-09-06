@@ -15,14 +15,14 @@ import de.charite.compbio.jannovar.hgvs.ConvertibleToHGVSString;
 public class NucleotidePointLocation implements ConvertibleToHGVSString {
 
 	/** 0-based base position */
-	final int basePos;
+	private final int basePos;
 	/** 1-based offset into the "gaps" of the coordinate system */
-	final int offset;
+	private final int offset;
 	/**
 	 * <code>true</code> if the position if downstream of the CDS end (3' UTR), use negative {@link #basePos} for 5'
 	 * UTR.
 	 */
-	final boolean downstreamOfCDS;
+	private final boolean downstreamOfCDS;
 
 	public static NucleotidePointLocation build(int basePos) {
 		return new NucleotidePointLocation(basePos, 0, false);

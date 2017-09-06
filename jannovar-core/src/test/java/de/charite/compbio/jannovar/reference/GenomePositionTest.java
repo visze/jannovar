@@ -10,7 +10,7 @@ public class GenomePositionTest {
 	// TODO(holtgrew): Test conversion from forward to reverse strand.
 
 	/** this test uses this static hg19 reference dictionary */
-	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
+	private static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 
 	@Test
 	public void testConstructorDefaultPositionType() {

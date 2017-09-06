@@ -12,11 +12,11 @@ public class CDSPositionTest {
 	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 
 	/** transcript on forward strand */
-	TranscriptModelBuilder builderForward;
+	private TranscriptModelBuilder builderForward;
 	/** transcript on reverse strand */
-	TranscriptModelBuilder builderReverse;
+	private TranscriptModelBuilder builderReverse;
 	/** transcript info for the forward strand */
-	TranscriptModel infoForward;
+	private TranscriptModel infoForward;
 	/** transcript info for the reverse strand */
 	TranscriptModel infoReverse;
 

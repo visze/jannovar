@@ -14,8 +14,8 @@ import de.charite.compbio.jannovar.impl.parse.gtfgff.GFFParser;
 
 public class FeatureParserTest {
 
-	InputStream stream;
-	String lines;
+	private InputStream stream;
+	private String lines;
 
 	@Before
 	public void setUp() throws Exception {

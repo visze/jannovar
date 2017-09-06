@@ -29,13 +29,13 @@ import de.charite.compbio.jannovar.utils.ResourceUtils;
 public class NucleotideDuplicationToGenomeVariantReverseStrandTest {
 
 	/** path to Jannovar database file */
-	static String dbPath;
+	private static String dbPath;
 	/** path to Jannovar database file */
-	static String fastaPath;
+	private static String fastaPath;
 	/** Jannovar database */
-	JannovarData jannovarData;
+	private JannovarData jannovarData;
 	/** Translation of NucleotideChange to GenomeVariant */
-	NucleotideChangeToGenomeVariantTranslator translator;
+	private NucleotideChangeToGenomeVariantTranslator translator;
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {

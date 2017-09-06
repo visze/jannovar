@@ -64,9 +64,9 @@ public class GeneWiseMendelianAnnotationProcessor implements VariantContextProce
 	private final boolean interpretVariantFilters;
 
 	/** Currently active genes and variants assigned to them. */
-	HashMap<Gene, ArrayList<VariantContext>> activeGenes = new HashMap<>();
+	private HashMap<Gene, ArrayList<VariantContext>> activeGenes = new HashMap<>();
 	/** Currently buffered variants. */
-	HashMap<VariantContext, VariantContextCounter> activeVariants = new HashMap<>();
+	private HashMap<VariantContext, VariantContextCounter> activeVariants = new HashMap<>();
 
 	/** List of genes, indexed by interval tree */
 	private final GeneList geneList;

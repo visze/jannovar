@@ -24,13 +24,13 @@ import de.charite.compbio.jannovar.utils.ResourceUtils;
 public class NucleotidePositionConverterTest {
 
 	/** path to Jannovar database file */
-	static String dbPath;
+	private static String dbPath;
 	/** Jannovar database */
-	JannovarData jannovarData;
+	private JannovarData jannovarData;
 	/** TranscriptModel */
-	TranscriptModel tm;
+	private TranscriptModel tm;
 	/** Position conversion */
-	NucleotideLocationConverter converter;
+	private NucleotideLocationConverter converter;
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {

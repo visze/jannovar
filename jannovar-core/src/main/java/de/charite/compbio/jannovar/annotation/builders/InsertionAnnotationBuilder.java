@@ -145,36 +145,36 @@ public final class InsertionAnnotationBuilder extends AnnotationBuilder {
 	 * We use this helper class to simplify the access to the parameters such as {@link #wtCDSSeq} etc.
 	 */
 	private class CDSExonicAnnotationBuilder {
-		final Translator t = Translator.getTranslator();
+		private final Translator t = Translator.getTranslator();
 
 		// wild type CDS nucleotide sequence
-		final String wtCDSSeq;
+		private final String wtCDSSeq;
 		// variant CDS nucleotide sequence
-		final String varCDSSeq;
+		private final String varCDSSeq;
 
 		// wild type amino acid sequence
-		final String wtAASeq;
+		private final String wtAASeq;
 		// position of stop codon in wtAASeq, or -1 if none
-		final int wtAAStopPos;
+		private final int wtAAStopPos;
 		// variant amino acid sequence
-		final String varAASeq;
+		private final String varAASeq;
 		// position of stop codon in varAASeq, or -1 if none
-		final int varAAStopPos;
+		private final int varAAStopPos;
 
 		// Insertion position on CDS.
-		final CDSPosition insertPos;
+		private final CDSPosition insertPos;
 		// Insert position in amino acid string.
-		final int varAAInsertPos; // TODO(holtgrem): replace with aaChange.pos
+		private final int varAAInsertPos; // TODO(holtgrem): replace with aaChange.pos
 
 		// We keep the following three variables as state of the algorithm since we do not have easy-to-use triples in
 		// Java.
 
 		// the variant type, updated in handleFrameShiftCase() and handleNonFrameShiftCase()
-		ArrayList<VariantEffect> varTypes = new ArrayList<VariantEffect>();
+		private ArrayList<VariantEffect> varTypes = new ArrayList<VariantEffect>();
 		// the amino acid change, updated in handleFrameShiftCase() and handleNonFrameShiftCase()
-		AminoAcidChange aaChange;
+		private AminoAcidChange aaChange;
 		// the predicted protein change, updated in handleFrameShiftCase() and handleNonFrameShiftCase()
-		ProteinChange proteinChange;
+		private ProteinChange proteinChange;
 
 		public CDSExonicAnnotationBuilder() {
 			this.wtCDSSeq = projector.getTranscriptStartingAtCDS();

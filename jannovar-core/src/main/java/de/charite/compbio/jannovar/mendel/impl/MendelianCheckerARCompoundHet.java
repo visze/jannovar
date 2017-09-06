@@ -61,7 +61,7 @@ public class MendelianCheckerARCompoundHet extends AbstractMendelianChecker {
     /** In the single sample case, if we find two or more heterozygous variants, then there is compatibility with
      * autosomal recessive compound heterozygous inheritance.
      */
-	ImmutableList<GenotypeCalls> filterCompatibleRecordsSingleSample(Collection<GenotypeCalls> calls) {
+	protected ImmutableList<GenotypeCalls> filterCompatibleRecordsSingleSample(Collection<GenotypeCalls> calls) {
 		ImmutableList.Builder<GenotypeCalls> builder = new ImmutableList.Builder<>();
 		for (GenotypeCalls gc : calls) {
 			if (gc.getGenotypeBySampleNo(0).isHet())

@@ -15,7 +15,7 @@ import de.charite.compbio.jannovar.hgvs.nts.variant.SingleAlleleNucleotideVarian
  */
 public class HGVSParserDriverNucleotideDeletionTest {
 
-	HGVSParser driver;
+	private HGVSParser driver;
 
 	@Before
 	public void setUp() throws Exception {

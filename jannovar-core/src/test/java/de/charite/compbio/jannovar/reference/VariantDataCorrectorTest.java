@@ -16,36 +16,36 @@ public class VariantDataCorrectorTest {
 	@Test
 	public void testSingleNucleotide() {
 		VariantDataCorrector corr = new VariantDataCorrector("C", "T", 100);
-		Assert.assertEquals(corr.position, 100);
-		Assert.assertEquals(corr.ref, "C");
-		Assert.assertEquals(corr.alt, "T");
+		Assert.assertEquals(corr.getPosition(), 100);
+		Assert.assertEquals(corr.getRef(), "C");
+		Assert.assertEquals(corr.getAlt(), "T");
 	}
 
 	/** Test with insertion data. */
 	@Test
 	public void testInsertion() {
 		VariantDataCorrector corr = new VariantDataCorrector("CGAT", "C", 100);
-		Assert.assertEquals(corr.position, 101);
-		Assert.assertEquals(corr.ref, "GAT");
-		Assert.assertEquals(corr.alt, "");
+		Assert.assertEquals(corr.getPosition(), 101);
+		Assert.assertEquals(corr.getRef(), "GAT");
+		Assert.assertEquals(corr.getAlt(), "");
 	}
 
 	/** Test with substitution data. */
 	@Test
 	public void testSubstitution() {
 		VariantDataCorrector corr = new VariantDataCorrector("CCGA", "CGAT", 100);
-		Assert.assertEquals(corr.position, 101);
-		Assert.assertEquals(corr.ref, "CGA");
-		Assert.assertEquals(corr.alt, "GAT");
+		Assert.assertEquals(corr.getPosition(), 101);
+		Assert.assertEquals(corr.getRef(), "CGA");
+		Assert.assertEquals(corr.getAlt(), "GAT");
 	}
 
 	/** Test with deletion data. */
 	@Test
 	public void testDeletion() {
 		VariantDataCorrector corr = new VariantDataCorrector("C", "CGAT", 100);
-		Assert.assertEquals(corr.position, 101);
-		Assert.assertEquals(corr.ref, "");
-		Assert.assertEquals(corr.alt, "GAT");
+		Assert.assertEquals(corr.getPosition(), 101);
+		Assert.assertEquals(corr.getRef(), "");
+		Assert.assertEquals(corr.getAlt(), "GAT");
 	}
 
 }

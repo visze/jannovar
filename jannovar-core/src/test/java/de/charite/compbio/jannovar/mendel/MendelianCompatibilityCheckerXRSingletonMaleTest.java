@@ -17,9 +17,9 @@ import de.charite.compbio.jannovar.pedigree.Sex;
 
 public class MendelianCompatibilityCheckerXRSingletonMaleTest extends MendelianCompatibilityCheckerTestBase {
 
-	MendelianInheritanceChecker checker;
-	List<GenotypeCalls> gcList;
-	ImmutableMap<ModeOfInheritance, ImmutableList<GenotypeCalls>> result;
+	private MendelianInheritanceChecker checker;
+	private List<GenotypeCalls> gcList;
+	private ImmutableMap<ModeOfInheritance, ImmutableList<GenotypeCalls>> result;
 
 	@Before
 	public void setUp() throws Exception {

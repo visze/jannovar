@@ -27,11 +27,11 @@ import htsjdk.variant.vcf.VCFHeader;
  */
 public class DBVariantContextAnnotatorFactoryTest {
 
-	String pathDBVCF;
-	String pathRefFASTA;
-	DBAnnotationOptions options;
-	VCFFileReader vcfReader;
-	ByteArrayOutputStream outStream;
+	private String pathDBVCF;
+	private String pathRefFASTA;
+	private DBAnnotationOptions options;
+	private VCFFileReader vcfReader;
+	private ByteArrayOutputStream outStream;
 
 	@Before
 	public void setUp() throws Exception {

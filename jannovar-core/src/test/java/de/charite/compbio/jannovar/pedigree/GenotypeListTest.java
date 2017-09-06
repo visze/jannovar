@@ -8,12 +8,12 @@ import com.google.common.collect.ImmutableList;
 
 public class GenotypeListTest {
 
-	String geneName;
-	ImmutableList<String> names;
-	ImmutableList<ImmutableList<Genotype>> calls;
-	Pedigree pedigree1, pedigree2;
+	protected String geneName;
+	private ImmutableList<String> names;
+	protected ImmutableList<ImmutableList<Genotype>> calls;
+	private Pedigree pedigree1, pedigree2;
 	/** the {@link GenotypeCalls} under test */
-	GenotypeList list;
+	private GenotypeList list;
 
 	@Before
 	public void setUp() throws PedParseException {

@@ -11,9 +11,9 @@ import com.google.common.collect.ImmutableMap;
 final public class GenomeRegionList {
 
 	/** List of {@link GenomeRegion} objects */
-	ImmutableList<GenomeRegion> genomeRegions;
+	private ImmutableList<GenomeRegion> genomeRegions;
 	/** Mapping from contig name to {@link GenomeRegion} */
-	ImmutableMap<String, GenomeRegion> nameToRegion;
+	private ImmutableMap<String, GenomeRegion> nameToRegion;
 
 	public GenomeRegionList(Iterable<GenomeRegion> regions) {
 		ImmutableList.Builder<GenomeRegion> listBuilder = new ImmutableList.Builder<>();

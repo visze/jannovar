@@ -20,9 +20,9 @@ import de.charite.compbio.jannovar.pedigree.Sex;
 
 public class PedFileReaderTest {
 
-	File tmpFileWithHeader;
-	File tmpFileWithoutHeader;
-	PedFileReader reader;
+	private File tmpFileWithHeader;
+	private File tmpFileWithoutHeader;
+	private PedFileReader reader;
 
 	@Before
 	public void setUp() throws IOException {

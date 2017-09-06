@@ -12,7 +12,7 @@ import de.charite.compbio.jannovar.reference.Strand;
 
 public class GenomicNucleotideChangeBuilderTest {
 
-	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
+	private static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 	private GenomeVariant varIns;
 	private GenomeVariant varDel;
 	private GenomeVariant varSNV;

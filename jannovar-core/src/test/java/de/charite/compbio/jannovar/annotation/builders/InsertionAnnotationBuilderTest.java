@@ -29,13 +29,13 @@ public class InsertionAnnotationBuilderTest {
 	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 
 	/** transcript on forward strand */
-	TranscriptModelBuilder builderForward;
+	private TranscriptModelBuilder builderForward;
 	/** transcript on reverse strand */
-	TranscriptModelBuilder builderReverse;
+	private TranscriptModelBuilder builderReverse;
 	/** transcript info on forward strand */
-	TranscriptModel infoForward;
+	private TranscriptModel infoForward;
 	/** transcript info on reverse strand */
-	TranscriptModel infoReverse;
+	private TranscriptModel infoReverse;
 
 	@Before
 	public void setUp() {
@@ -654,7 +654,7 @@ public class InsertionAnnotationBuilderTest {
 
 	@Test
 	public void testInsertionAtIntronExonBorder() throws InvalidGenomeVariant {
-		String x = "uc001anx.3	chr1	+	6640062	6649340	6640669	6649272	11	6640062,6640600,6642117,6645978,6646754,6647264,6647537,6648119,6648337,6648815,6648975,	6640196,6641359,6642359,6646090,6646847,6647351,6647692,6648256,6648502,6648904,6649340,	P10074	uc001anx.3";
+//		String x = "uc001anx.3	chr1	+	6640062	6649340	6640669	6649272	11	6640062,6640600,6642117,6645978,6646754,6647264,6647537,6648119,6648337,6648815,6648975,	6640196,6641359,6642359,6646090,6646847,6647351,6647692,6648256,6648502,6648904,6649340,	P10074	uc001anx.3";
 
 		// directly after the exons
 

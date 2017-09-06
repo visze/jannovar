@@ -5,13 +5,12 @@ import org.junit.Test;
 
 import de.charite.compbio.jannovar.impl.parse.gtfgff.FeatureRecord;
 import de.charite.compbio.jannovar.impl.parse.gtfgff.FeatureRecordParser;
-import de.charite.compbio.jannovar.impl.parse.gtfgff.GFFRecordParser;
 
 import org.junit.Assert;
 
 public class GTFRecordParserTest {
 
-	String line;
+	private String line;
 
 	@Before
 	public void setUp() throws Exception {

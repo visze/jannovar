@@ -11,9 +11,9 @@ public class GenomeVariantTest {
 	/** this test uses this static hg19 reference dictionary */
 	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 
-	GenomePosition genomePosOneBasedForward;
-	GenomePosition genomePosZeroBasedForward;
-	GenomePosition genomePosZeroBasedReverse;
+	private GenomePosition genomePosOneBasedForward;
+	private GenomePosition genomePosZeroBasedForward;
+	private GenomePosition genomePosZeroBasedReverse;
 
 	@Before
 	public void setUp() {

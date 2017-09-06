@@ -10,7 +10,7 @@ import de.charite.compbio.jannovar.reference.AminoAcidChangeNormalizer;
 public class AminoAcidChangeTest {
 
 	/** the amino acid strings to use as the references */
-	String ref, ref2;
+	private String ref, ref2;
 
 	@Before
 	public void setUp() throws Exception {

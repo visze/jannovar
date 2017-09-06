@@ -17,8 +17,8 @@ import de.charite.compbio.jannovar.pedigree.Sex;
 
 public class PedigreeQueryDecoratorTest {
 
-	Pedigree pedigree;
-	PedigreeQueryDecorator decorator;
+	private Pedigree pedigree;
+	private PedigreeQueryDecorator decorator;
 
 	@Before
 	public void setUp() throws PedParseException {

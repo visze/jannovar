@@ -24,15 +24,15 @@ import de.charite.compbio.jannovar.reference.TranscriptModelFactory;
 public class SNVAnnotationBuilderTest {
 
 	/** this test uses this static hg19 reference dictionary */
-	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
-	/** transcript on forward strand */
+	private static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
+	private /** transcript on forward strand */
 	TranscriptModelBuilder builderForward;
 	/** transcript on reverse strand */
-	TranscriptModelBuilder builderReverse;
+	private TranscriptModelBuilder builderReverse;
 	/** transcript info on forward strand */
-	TranscriptModel infoForward;
+	private TranscriptModel infoForward;
 	/** transcript info on reverse strand */
-	TranscriptModel infoReverse;
+	private TranscriptModel infoReverse;
 
 	@Before
 	public void setUp() {

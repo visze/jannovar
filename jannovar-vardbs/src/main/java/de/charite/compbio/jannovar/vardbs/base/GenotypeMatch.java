@@ -10,15 +10,15 @@ import htsjdk.variant.variantcontext.VariantContext;
 public final class GenotypeMatch {
 
 	/** Numeric index of the observed allele (in <code>obsVC</code>) */
-	final int observedAllele;
+	final private int observedAllele;
 	/** Numeric index of the database allele (in <code>dbVC</code>) */
-	final int dbAllele;
+	final private int dbAllele;
 	/** The observed VariantContext */
-	final VariantContext obsVC;
+	final private VariantContext obsVC;
 	/** The database VariantContext */
-	final VariantContext dbVC;
+	final private VariantContext dbVC;
 	/** Whether is a match (if false: overlap only). */
-	final boolean isMatch;
+	final private boolean isMatch;
 
 	public GenotypeMatch(int observedAllele, int dbAllele, VariantContext obsVC,
 			VariantContext dbVC, boolean isMatch) {
