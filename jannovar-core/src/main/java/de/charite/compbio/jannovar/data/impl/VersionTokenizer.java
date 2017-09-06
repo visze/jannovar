@@ -34,7 +34,7 @@ public class VersionTokenizer {
         _length = versionString.length();
     }
 
-    public boolean MoveNext() {
+    public boolean moveNext() {
         _number = 0;
         _suffix = "";
         _hasValue = false;
