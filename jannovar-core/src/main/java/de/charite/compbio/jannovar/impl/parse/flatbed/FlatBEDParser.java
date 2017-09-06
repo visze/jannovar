@@ -42,7 +42,7 @@ public class FlatBEDParser implements TranscriptParser {
 	private final Section iniSection;
 
 	/** whether or not to print the progress bars */
-	private final boolean printProgressBars;
+//	private final boolean printProgressBars;
 
 	/**
 	 * @param refDict
@@ -58,7 +58,7 @@ public class FlatBEDParser implements TranscriptParser {
 		this.refDict = refDict;
 		this.basePath = basePath;
 		this.iniSection = iniSection;
-		this.printProgressBars = printProgressBars;
+//		this.printProgressBars = printProgressBars;
 	}
 
 	@Override

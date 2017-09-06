@@ -22,7 +22,7 @@ public class PedFileReaderTest {
 
 	private File tmpFileWithHeader;
 	private File tmpFileWithoutHeader;
-	private PedFileReader reader;
+//	private PedFileReader reader;
 
 	@Before
 	public void setUp() throws IOException {

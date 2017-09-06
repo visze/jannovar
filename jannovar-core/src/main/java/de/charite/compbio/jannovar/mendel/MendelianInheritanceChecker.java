@@ -16,7 +16,6 @@ import de.charite.compbio.jannovar.mendel.impl.MendelianCheckerXD;
 import de.charite.compbio.jannovar.mendel.impl.MendelianCheckerXRCompoundHet;
 import de.charite.compbio.jannovar.mendel.impl.MendelianCheckerXRHom;
 import de.charite.compbio.jannovar.pedigree.Pedigree;
-import de.charite.compbio.jannovar.pedigree.PedigreeQueryDecorator;
 
 /**
  * Facade class for checking lists of {@link GenotypeCalls} for compatibility with mendelian inheritance
@@ -29,7 +28,7 @@ public final class MendelianInheritanceChecker {
 	/** Pedigree to use for mendelian inheritance checking */
 	final private Pedigree pedigree;
 	/** Helper for querying a pedigree */
-	final private PedigreeQueryDecorator queryPed;
+//	final private PedigreeQueryDecorator queryPed;
 	/** Mendelian compatibility checker for each sub mode of inheritance */
 	final private ImmutableMap<SubModeOfInheritance, AbstractMendelianChecker> checkers;
 
@@ -41,7 +40,7 @@ public final class MendelianInheritanceChecker {
 	 */
 	public MendelianInheritanceChecker(Pedigree pedigree) {
 		this.pedigree = pedigree;
-		this.queryPed = new PedigreeQueryDecorator(pedigree);
+//		this.queryPed = new PedigreeQueryDecorator(pedigree);
 
 		ImmutableMap.Builder<SubModeOfInheritance, AbstractMendelianChecker> builder = new ImmutableMap.Builder<>();
 		builder.put(SubModeOfInheritance.AUTOSOMAL_DOMINANT, new MendelianCheckerAD(this));

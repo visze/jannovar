@@ -14,7 +14,7 @@ import de.charite.compbio.jannovar.reference.TranscriptModelBuilder;
  */
 public final class FlatBEDFastaParser /*extends FastaParser*/ {
 
-	private String[] fields;
+//	private String[] fields;
 
 	public FlatBEDFastaParser(String filename, ArrayList<TranscriptModelBuilder> models, boolean printProgressBars) {
 		//super(filename, models, printProgressBars);

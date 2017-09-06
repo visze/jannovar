@@ -2,12 +2,9 @@ package de.charite.compbio.jannovar.cmd.annotate_vcf;
 
 import de.charite.compbio.jannovar.cmd.annotate_vcf.JannovarAnnotateVCFOptions.BedAnnotationOptions;
 import htsjdk.samtools.util.Interval;
-import htsjdk.tribble.AbstractFeatureReader;
 import htsjdk.tribble.TabixFeatureReader;
 import htsjdk.tribble.bed.BEDCodec;
 import htsjdk.tribble.bed.BEDFeature;
-import htsjdk.tribble.index.Index;
-import htsjdk.tribble.index.IndexFactory;
 import htsjdk.tribble.readers.LineIterator;
 import htsjdk.variant.variantcontext.VariantContext;
 import htsjdk.variant.variantcontext.VariantContextBuilder;

@@ -68,7 +68,7 @@ public class PedigreeFilterAnnotator {
 			// Enforce registration of samples in extraFts.
 			extraFts.put(gt.getSampleName(), new ArrayList<>());
 
-			GenotypeBuilder gtBuilder = new GenotypeBuilder(gt);
+//			GenotypeBuilder gtBuilder = new GenotypeBuilder(gt);
 
 			// Get de novo allele, null if not de novo
 			final Allele deNovoAllele = getDeNovoAllele(vc, gt.getSampleName());

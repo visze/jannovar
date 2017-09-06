@@ -1,5 +1,12 @@
 package de.charite.compbio.jannovar.vardbs.generic_tsv;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import de.charite.compbio.jannovar.vardbs.base.AlleleMatcher;
 import de.charite.compbio.jannovar.vardbs.base.DBAnnotationDriver;
 import de.charite.compbio.jannovar.vardbs.base.DatabaseVariantContextProvider;
@@ -9,12 +16,6 @@ import de.charite.compbio.jannovar.vardbs.base.VCFHeaderExtender;
 import htsjdk.samtools.util.CloseableIterator;
 import htsjdk.variant.variantcontext.VariantContext;
 import htsjdk.variant.variantcontext.VariantContextBuilder;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Annotation driver class for annotations generic TSV data
@@ -290,6 +291,7 @@ public final class GenericTSVAnnotationDriver implements DBAnnotationDriver {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private <Label extends Comparable<Label>, Value> void annotateWithImpl(VariantContext vc,
 			String infix, Map<Integer, List<VariantContext>> dbRecords,
 			GenericTSVValueColumnDescription desc, GenericTSVValueColumnDescription refDesc,
