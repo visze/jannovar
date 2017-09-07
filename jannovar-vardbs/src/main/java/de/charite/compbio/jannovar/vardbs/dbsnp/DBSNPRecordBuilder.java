@@ -125,7 +125,7 @@ public class DBSNPRecordBuilder {
 	/** List of information on old variants */
 	private ArrayList<String> oldVariants;
 
-	DBSNPRecordBuilder() {
+	public DBSNPRecordBuilder() {
 		chrom = null;
 		pos = -1;
 		id = null;

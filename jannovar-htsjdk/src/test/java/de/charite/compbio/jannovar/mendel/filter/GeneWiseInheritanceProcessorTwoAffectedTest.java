@@ -33,8 +33,8 @@ import htsjdk.variant.vcf.VCFFileReader;
  */
 public class GeneWiseInheritanceProcessorTwoAffectedTest {
 
-	final static String KEY = MendelVCFHeaderExtender.key();
-	final static String KEY_SUB = MendelVCFHeaderExtender.keySub();
+	private final static String KEY = MendelVCFHeaderExtender.key();
+	private final static String KEY_SUB = MendelVCFHeaderExtender.keySub();
 
 	/** Pedigree with two affected children */
 	private Pedigree trio;

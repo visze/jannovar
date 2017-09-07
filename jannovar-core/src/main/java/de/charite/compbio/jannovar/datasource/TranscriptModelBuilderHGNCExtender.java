@@ -35,10 +35,10 @@ public class TranscriptModelBuilderHGNCExtender {
 	private final String basePath;
 
 	/** Extract gene ID from {@link HGNCRecord} */
-	Function<HGNCRecord, List<String>> extractorHGNC;
+	private Function<HGNCRecord, List<String>> extractorHGNC;
 
 	/** Extract gene ID from {@link TranscriptModelBuilder} */
-	Function<TranscriptModelBuilder, String> extractorTX;
+	private Function<TranscriptModelBuilder, String> extractorTX;
 
 	public TranscriptModelBuilderHGNCExtender(String basePath, Function<HGNCRecord, List<String>> extractorHGNC,
 			Function<TranscriptModelBuilder, String> extractorTX) {

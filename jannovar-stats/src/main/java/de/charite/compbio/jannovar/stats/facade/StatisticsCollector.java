@@ -26,7 +26,7 @@ import htsjdk.variant.variantcontext.VariantContext;
 public class StatisticsCollector {
 
 	/** Sample names */
-	ImmutableList<String> sampleNames;
+	private ImmutableList<String> sampleNames;
 
 	/**
 	 * Per-sample statistics, <code>null</code> codes for statistics on the variants regardless of genotype (i.e.,

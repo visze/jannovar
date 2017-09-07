@@ -16,9 +16,9 @@ import de.charite.compbio.jannovar.reference.Strand;
 public class GenomeRegionSequenceExtractor {
 
 	/** Jannovar database for mapping between canonical name and name in FASTA */
-	final JannovarData jannovarData;
+	private final JannovarData jannovarData;
 	/** object to load sequences from */
-	IndexedFastaSequenceFile indexedFile;
+	private IndexedFastaSequenceFile indexedFile;
 
 	public GenomeRegionSequenceExtractor(JannovarData jannovarData, IndexedFastaSequenceFile indexedFile) {
 		super();

@@ -34,7 +34,7 @@ public class BedFileAnnotator implements Closeable {
 	private final File featureFile;
 
 	/** This is used for reading. */
-	TabixFeatureReader<BEDFeature, LineIterator> reader;
+	private TabixFeatureReader<BEDFeature, LineIterator> reader;
 
 	public BedFileAnnotator(BedAnnotationOptions options) {
 		this.options = options;

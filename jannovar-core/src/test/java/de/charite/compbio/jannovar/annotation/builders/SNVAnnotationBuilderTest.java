@@ -25,8 +25,8 @@ public class SNVAnnotationBuilderTest {
 
 	/** this test uses this static hg19 reference dictionary */
 	private static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
-	private /** transcript on forward strand */
-	TranscriptModelBuilder builderForward;
+	/** transcript on forward strand */
+	private TranscriptModelBuilder builderForward;
 	/** transcript on reverse strand */
 	private TranscriptModelBuilder builderReverse;
 	/** transcript info on forward strand */

@@ -20,7 +20,7 @@ import de.charite.compbio.jannovar.annotation.VariantEffect;
 public class StatisticsWriter implements AutoCloseable {
 
 	private StatisticsCollector statsCollector;
-	PrintWriter writer;
+	private PrintWriter writer;
 
 	public StatisticsWriter(StatisticsCollector statsCollector, File targetPath) throws FileNotFoundException {
 		this.statsCollector = statsCollector;

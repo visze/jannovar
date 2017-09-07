@@ -11,13 +11,13 @@ import de.charite.compbio.jannovar.impl.intervals.IntervalEndExtractor;
 
 public class IntervalArrayTest {
 
-	class Triple implements Comparable<Triple> {
+	private class Triple implements Comparable<Triple> {
 
 		private final int beginPos;
 		private final int endPos;
 		private final String text;
 
-		Triple(int beginPos, int endPos, String text) {
+		private Triple(int beginPos, int endPos, String text) {
 			this.beginPos = beginPos;
 			this.endPos = endPos;
 			this.text = text;
@@ -75,7 +75,7 @@ public class IntervalArrayTest {
 
 	}
 
-	class TripleEndExtractor implements IntervalEndExtractor<Triple> {
+	private class TripleEndExtractor implements IntervalEndExtractor<Triple> {
 
 		public int getBegin(Triple triple) {
 			return triple.beginPos;
@@ -87,7 +87,7 @@ public class IntervalArrayTest {
 
 	}
 
-	ArrayList<Triple> getList1() {
+	private ArrayList<Triple> getList1() {
 		ArrayList<Triple> lst = new ArrayList<Triple>();
 
 		lst.add(new Triple(1, 4, "a"));
@@ -101,7 +101,7 @@ public class IntervalArrayTest {
 		return lst;
 	}
 
-	ArrayList<Triple> getList2() {
+	private ArrayList<Triple> getList2() {
 		ArrayList<Triple> lst = new ArrayList<Triple>();
 
 		lst.add(new Triple(1, 9, "a"));
@@ -120,7 +120,7 @@ public class IntervalArrayTest {
 
 	}
 
-	ArrayList<Triple> getList3() {
+	private ArrayList<Triple> getList3() {
 		ArrayList<Triple> lst = new ArrayList<Triple>();
 
 		lst.add(new Triple(1, 9, "a"));
@@ -138,7 +138,7 @@ public class IntervalArrayTest {
 
 	}
 
-	ArrayList<Triple> getList4() {
+	private ArrayList<Triple> getList4() {
 		ArrayList<Triple> lst = new ArrayList<Triple>();
 
 		lst.add(new Triple(0, 11, "a"));

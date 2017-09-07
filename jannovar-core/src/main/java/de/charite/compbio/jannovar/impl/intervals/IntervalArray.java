@@ -349,7 +349,7 @@ public final class IntervalArray<T> implements Serializable {
 		/**
 		 * Fill {@link #intervalsEnd}.
 		 */
-		void buildIntervalsEnd() {
+		private void buildIntervalsEnd() {
 			// sort by (end, begin)
 			Collections.sort(tmpList, new Comparator<MutableInterval<T>>() {
 				public int compare(MutableInterval<T> o1, MutableInterval<T> o2) {

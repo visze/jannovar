@@ -14,7 +14,7 @@ import de.charite.compbio.jannovar.impl.util.Translator;
  */
 public class TranslatorTest {
 
-	Translator translator;
+	private Translator translator;
 
 	@Before
 	public void setUp() {

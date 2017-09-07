@@ -9,7 +9,7 @@ import de.charite.compbio.jannovar.data.ReferenceDictionary;
 public class GenomeVariantTest {
 
 	/** this test uses this static hg19 reference dictionary */
-	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
+	private static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 
 	private GenomePosition genomePosOneBasedForward;
 	private GenomePosition genomePosZeroBasedForward;

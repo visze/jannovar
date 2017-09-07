@@ -13,10 +13,10 @@ import htsjdk.variant.vcf.VCFFileReader;
 
 public class DBSNPAnnotationDriverBaseTest {
 
-	String dbSNPVCFPath;
-	String fastaPath;
-	VCFFileReader vcfReader;
-	DBAnnotationOptions options;
+	protected String dbSNPVCFPath;
+	protected String fastaPath;
+	protected VCFFileReader vcfReader;
+	protected DBAnnotationOptions options;
 
 	@Before
 	public void setUpClass() throws Exception {
@@ -48,5 +48,7 @@ public class DBSNPAnnotationDriverBaseTest {
 
 		vcfReader = new VCFFileReader(new File(testVCFPath), false);
 	}
+	
+	
 
 }

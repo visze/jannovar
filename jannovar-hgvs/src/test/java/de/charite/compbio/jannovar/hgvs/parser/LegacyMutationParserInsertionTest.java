@@ -8,7 +8,7 @@ import de.charite.compbio.jannovar.hgvs.legacy.LegacyVariant;
 
 public class LegacyMutationParserInsertionTest {
 
-	LegacyChangeParser driver;
+	private LegacyChangeParser driver;
 
 	@Before
 	public void setUp() throws Exception {

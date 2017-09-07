@@ -14,11 +14,11 @@ public class CDSPositionTest {
 	/** transcript on forward strand */
 	private TranscriptModelBuilder builderForward;
 	/** transcript on reverse strand */
-	private TranscriptModelBuilder builderReverse;
+//	private TranscriptModelBuilder builderReverse;
 	/** transcript info for the forward strand */
 	private TranscriptModel infoForward;
 	/** transcript info for the reverse strand */
-	TranscriptModel infoReverse;
+//	private TranscriptModel infoReverse;
 
 	@Before
 	public void setUp() {
@@ -26,10 +26,10 @@ public class CDSPositionTest {
 				"uc009vmz.1\tchr1\t+\t11539294\t11541938\t11539294\t11539294\t2\t"
 						+ "11539294,11541314,\t11539429,11541938,\tuc009vmz.1");
 		this.infoForward = builderForward.build();
-		this.builderReverse = TranscriptModelFactory.parseKnownGenesLine(refDict,
-				"uc009vjr.2\tchr1\t-\t893648\t894679\t894010\t894620\t2\t"
-						+ "893648,894594,\t894461,894679,\tuc009vjr.2");
-		this.infoReverse = builderReverse.build();
+//		this.builderReverse = TranscriptModelFactory.parseKnownGenesLine(refDict,
+//				"uc009vjr.2\tchr1\t-\t893648\t894679\t894010\t894620\t2\t"
+//						+ "893648,894594,\t894461,894679,\tuc009vjr.2");
+//		this.infoReverse = builderReverse.build();
 	}
 
 	@Test

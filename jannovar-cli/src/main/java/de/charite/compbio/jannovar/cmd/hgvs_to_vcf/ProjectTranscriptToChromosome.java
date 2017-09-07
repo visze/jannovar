@@ -52,10 +52,10 @@ public class ProjectTranscriptToChromosome extends JannovarAnnotationCommand {
 	private ProjectTranscriptToChromosomeOptions options;
 
 	/** FAI-indexed FASTA file to use */
-	IndexedFastaSequenceFile fasta;
+	private IndexedFastaSequenceFile fasta;
 
 	/** Translation of variants */
-	NucleotideChangeToGenomeVariantTranslator translator;
+	private NucleotideChangeToGenomeVariantTranslator translator;
 
 	public ProjectTranscriptToChromosome(String argv[], Namespace args) throws CommandLineParsingException {
 		this.options = new ProjectTranscriptToChromosomeOptions();
