@@ -26,7 +26,7 @@ import de.charite.compbio.jannovar.reference.TranscriptModelFactory;
 public class InsertionAnnotationBuilderTest {
 
 	/** this test uses this static hg19 reference dictionary */
-	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
+	private static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 
 	/** transcript on forward strand */
 	private TranscriptModelBuilder builderForward;

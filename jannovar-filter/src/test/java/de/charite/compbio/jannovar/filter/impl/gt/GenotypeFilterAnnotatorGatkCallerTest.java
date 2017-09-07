@@ -18,7 +18,7 @@ import htsjdk.variant.variantcontext.VariantContext;
  */
 public class GenotypeFilterAnnotatorGatkCallerTest extends GenotypeFilterTestBase {
 
-	GenotypeFilterAnnotator annotator;
+	private GenotypeFilterAnnotator annotator;
 
 	@Before
 	public void setUp() {

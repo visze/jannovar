@@ -14,7 +14,7 @@ import org.junit.Test;
  */
 public class TresholdFilterAnnotatorTest extends TresholdFilterTestBase {
 
-	GenotypeThresholdFilterAnnotator annotator;
+	private GenotypeThresholdFilterAnnotator annotator;
 
 	@Before
 	public void setUp() {

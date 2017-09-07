@@ -22,7 +22,7 @@ public final class GenomeInterval implements Serializable, Comparable<GenomeInte
 	private static final long serialVersionUID = 2L;
 
 	/** reference dictionary to use for coordinate translation */
-	final ReferenceDictionary refDict;
+	protected final ReferenceDictionary refDict;
 
 	/** the strand that the position is located on */
 	private final Strand strand;

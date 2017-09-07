@@ -8,7 +8,7 @@ import de.charite.compbio.jannovar.impl.intervals.Interval;
 
 public class IntervalTest {
 
-	Interval<String> interval;
+	private Interval<String> interval;
 
 	@Before
 	public void setUp() throws Exception {

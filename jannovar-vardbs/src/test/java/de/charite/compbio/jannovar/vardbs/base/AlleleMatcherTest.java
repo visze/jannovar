@@ -23,18 +23,18 @@ import htsjdk.variant.vcf.VCFFileReader;
  */
 public class AlleleMatcherTest {
 
-	static String fastaPath;
-	static VariantNormalizer normalizer;
+	private static String fastaPath;
+//	private static VariantNormalizer normalizer;
 
 	// Path to VCF file with single alternative alleles
-	static String vcfSingle;
+	private static String vcfSingle;
 	// Path to VCF file with multiple alternative alleles
-	static String vcfMultiple;
+	private static String vcfMultiple;
 
 	// VCF record read from vcfSingle
-	static VariantContext vcSingle;
+	private static VariantContext vcSingle;
 	// VCF record read from vcfMultiple
-	static VariantContext vcMultiple;
+	private static VariantContext vcMultiple;
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
@@ -45,7 +45,7 @@ public class AlleleMatcherTest {
 		ResourceUtils.copyResourceToFile("/chr1.fasta.fai", new File(fastaPath + ".fai"));
 
 		// Construct variant normalizer with FASTA path to test
-		normalizer = new VariantNormalizer(fastaPath);
+//		normalizer = new VariantNormalizer(fastaPath);
 
 		// Header of VCF file
 		String vcfHeader = "##fileformat=VCFv4.0\n"

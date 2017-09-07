@@ -12,11 +12,11 @@ import de.charite.compbio.jannovar.hgvs.nts.NucleotidePointLocation;
 public final class NucleotidePointLocationBuilder {
 
 	/** transcript to use for the coordinate system */
-	final TranscriptModel transcript;
+	private final TranscriptModel transcript;
 	/** helper for performing coordinate projection */
-	final TranscriptProjectionDecorator projector;
+	private final TranscriptProjectionDecorator projector;
 	/** helper for performing Sequence Ontology feature queries */
-	final TranscriptSequenceOntologyDecorator soDecorator;
+	private final TranscriptSequenceOntologyDecorator soDecorator;
 
 	/** Construct the position builder with the given transcript */
 	public NucleotidePointLocationBuilder(TranscriptModel transcript) {

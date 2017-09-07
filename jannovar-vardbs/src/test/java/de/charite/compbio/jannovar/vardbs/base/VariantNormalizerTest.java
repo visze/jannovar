@@ -12,8 +12,8 @@ import de.charite.compbio.jannovar.utils.ResourceUtils;
 
 public class VariantNormalizerTest {
 
-	static String fastaPath;
-	static VariantNormalizer normalizer;
+	private static String fastaPath;
+	private static VariantNormalizer normalizer;
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {

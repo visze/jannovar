@@ -29,14 +29,14 @@ import org.junit.Assert;
 public class RefSeqParserTest {
 
 	/** this test uses this static hg19 reference dictionary */
-	static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
+	private static final ReferenceDictionary refDict = HG19RefDictBuilder.build();
 
-	InputStream stream;
-	File dataDirectory;
+	private InputStream stream;
+	private File dataDirectory;
 	// INI section for all transcripts
-	Section allIniSection;
+	private Section allIniSection;
 	// INI section for curated transcripts
-	Section curatedIniSection;
+	private Section curatedIniSection;
 
 	@Before
 	public void setUp() throws Exception {

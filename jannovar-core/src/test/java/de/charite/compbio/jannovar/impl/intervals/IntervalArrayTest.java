@@ -13,9 +13,9 @@ public class IntervalArrayTest {
 
 	class Triple implements Comparable<Triple> {
 
-		final int beginPos;
-		final int endPos;
-		final String text;
+		private final int beginPos;
+		private final int endPos;
+		private final String text;
 
 		Triple(int beginPos, int endPos, String text) {
 			this.beginPos = beginPos;

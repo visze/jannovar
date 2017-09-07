@@ -18,10 +18,10 @@ import htsjdk.samtools.reference.IndexedFastaSequenceFile;
  */
 public final class VariantNormalizer {
 
-	/** Path to indexed FASTA path to use */
-	final String fastaPath;
+//	/** Path to indexed FASTA path to use */
+//	private final String fastaPath;
 	/** Random access in FASTA files using FAI */
-	final IndexedFastaSequenceFile fai;
+	private final IndexedFastaSequenceFile fai;
 
 	/**
 	 * Construct new variant normalizer object
@@ -32,7 +32,7 @@ public final class VariantNormalizer {
 	 *             On problems with opening the FASTA/FAI file
 	 */
 	public VariantNormalizer(String fastaPath) throws JannovarVarDBException {
-		this.fastaPath = fastaPath;
+//		this.fastaPath = fastaPath;
 		try {
 			this.fai = new IndexedFastaSequenceFile(new File(fastaPath));
 		} catch (FileNotFoundException e) {

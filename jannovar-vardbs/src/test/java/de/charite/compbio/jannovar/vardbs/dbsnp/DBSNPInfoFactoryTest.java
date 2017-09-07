@@ -13,8 +13,8 @@ import htsjdk.variant.vcf.VCFFileReader;
 
 public class DBSNPInfoFactoryTest {
 
-	static String vcfPath;
-	static VCFFileReader vcfReader;
+	private static String vcfPath;
+	private static VCFFileReader vcfReader;
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {

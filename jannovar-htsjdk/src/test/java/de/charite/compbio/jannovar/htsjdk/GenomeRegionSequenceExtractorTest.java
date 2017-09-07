@@ -23,13 +23,13 @@ import de.charite.compbio.jannovar.utils.ResourceUtils;
 public class GenomeRegionSequenceExtractorTest {
 
 	/** path to FASTA file with sequence */
-	static String fastaPath;
+	private static String fastaPath;
 	/** path to Jannovar database file */
-	static String dbPath;
+	private static String dbPath;
 	/** indexed FASTA file reader */
-	IndexedFastaSequenceFile indexedFile;
+	private IndexedFastaSequenceFile indexedFile;
 	/** Jannovar database */
-	JannovarData jannovarData;
+	private JannovarData jannovarData;
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
