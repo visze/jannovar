@@ -44,7 +44,7 @@ public enum SequenceType {
 		case PROTEIN:
 			return "p.";
 		default:
-			throw new RuntimeException("Unexpected SequenceType " + this);
+			throw new UncheckedHGVSJannovarException("Unexpected SequenceType " + this);
 		}
 	}
 

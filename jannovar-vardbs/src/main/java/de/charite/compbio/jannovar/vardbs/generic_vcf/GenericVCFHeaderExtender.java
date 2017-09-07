@@ -1,11 +1,13 @@
 package de.charite.compbio.jannovar.vardbs.generic_vcf;
 
+import java.io.File;
+
+import de.charite.compbio.jannovar.UncheckedJannovarException;
 import de.charite.compbio.jannovar.vardbs.base.VCFHeaderExtender;
 import htsjdk.variant.vcf.VCFFileReader;
 import htsjdk.variant.vcf.VCFHeader;
 import htsjdk.variant.vcf.VCFHeaderLineCount;
 import htsjdk.variant.vcf.VCFInfoHeaderLine;
-import java.io.File;
 
 /**
  * Helper class for extending {@link VCFHeader}s for UK10K annotations.
@@ -52,12 +54,12 @@ public class GenericVCFHeaderExtender extends VCFHeaderExtender {
 						"Field " + fieldName + " from file " + genericVcfOptions.getPathVcfFile() + note);
 			} else if (countType == VCFHeaderLineCount.INTEGER) {
 				if (headerLine.getCount() != 1) {
-					throw new RuntimeException("Unsupported integer count " + headerLine.getCount());
+					throw new UncheckedJannovarException("Unsupported integer count " + headerLine.getCount());
 				}
 				line = new VCFInfoHeaderLine(prefix + infix + fieldName, 1, headerLine.getType(),
 						"Field " + fieldName + " from file " + genericVcfOptions.getPathVcfFile() + note);
 			} else {
-				throw new RuntimeException("Unsupported count type " + countType);
+				throw new UncheckedJannovarException("Unsupported count type " + countType);
 			}
 
 			header.addMetaDataLine(line);

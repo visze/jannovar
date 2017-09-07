@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.ImmutableList;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
 import de.charite.compbio.jannovar.data.ReferenceDictionary;
 import de.charite.compbio.jannovar.impl.parse.TranscriptParseException;
 import de.charite.compbio.jannovar.impl.parse.TranscriptParser;
@@ -106,7 +107,7 @@ public class FlatBEDParser implements TranscriptParser {
 			while ((line = br.readLine()) != null) {
 				String[] arr = line.trim().split("\t");
 				if (!arr[5].equals("+") && !arr[5].equals("-"))
-					throw new RuntimeException("Invalid strand value " + arr[5]);
+					throw new UncheckedJannovarException("Invalid strand value " + arr[5]);
 
 				Strand strand = (arr[5] == "+") ? Strand.FWD : Strand.REV;
 				int chr = refDict.getContigNameToID().get(arr[0]);
@@ -127,9 +128,9 @@ public class FlatBEDParser implements TranscriptParser {
 				result.add(builder);
 			}
 		} catch (FileNotFoundException e) {
-			throw new RuntimeException("Could not find file at " + path, e);
+			throw new UncheckedJannovarException("Could not find file at " + path, e);
 		} catch (IOException e) {
-			throw new RuntimeException("Problem reading from " + path, e);
+			throw new UncheckedJannovarException("Problem reading from " + path, e);
 		}
 
 		return result;

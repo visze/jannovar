@@ -8,6 +8,8 @@ import java.util.Comparator;
 
 import com.google.common.collect.ImmutableList;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
+
 /**
  * Sorted array of {@link Interval} objects representing an immutable interval
  * tree.
@@ -136,7 +138,7 @@ public final class IntervalArray<T> implements Serializable {
 		});
 
 		if (idx >= 0)
-			throw new RuntimeException("Found element although in right neighbor search!");
+			throw new UncheckedJannovarException("Found element although in right neighbor search!");
 		idx = -(idx + 1); // convert to insertion point
 
 		if (idx == intervals.size())

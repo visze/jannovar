@@ -1,5 +1,7 @@
 package de.charite.compbio.jannovar.vardbs.clinvar;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
+
 /**
  * Enum for describing ClinVar CLNSIG
  * 
@@ -70,7 +72,7 @@ public enum ClinVarSignificance {
         case 255:
             return OTHER;
 	    default:
-	        throw new RuntimeException("Invalid clin var significance number: " + i);
+	        throw new UncheckedJannovarException("Invalid clin var significance number: " + i);
 	    }
 	}
 }

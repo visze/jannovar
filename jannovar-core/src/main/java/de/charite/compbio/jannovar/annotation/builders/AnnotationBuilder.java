@@ -9,6 +9,7 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
 import de.charite.compbio.jannovar.annotation.Annotation;
+import de.charite.compbio.jannovar.annotation.AnnotationError;
 import de.charite.compbio.jannovar.annotation.AnnotationLocation;
 import de.charite.compbio.jannovar.annotation.AnnotationLocationBuilder;
 import de.charite.compbio.jannovar.annotation.AnnotationMessage;
@@ -402,7 +403,7 @@ abstract class AnnotationBuilder {
 			}
 			final int exonNum = projector.locateExon(firstChangePos);
 			if (exonNum == TranscriptProjectionDecorator.INVALID_EXON_ID)
-				throw new Error("Bug: positions should be in exons if we reach here");
+				throw new AnnotationError("Bug: positions should be in exons if we reach here");
 			if (exonNum != projector.locateExon(lastChangePos))
 				return locBuilder.build(); // no exon information if the deletion spans more than one
 

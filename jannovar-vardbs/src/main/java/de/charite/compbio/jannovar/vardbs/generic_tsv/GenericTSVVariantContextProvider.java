@@ -1,12 +1,5 @@
 package de.charite.compbio.jannovar.vardbs.generic_tsv;
 
-import com.google.common.collect.ImmutableList;
-import de.charite.compbio.jannovar.vardbs.base.DatabaseVariantContextProvider;
-import htsjdk.samtools.util.CloseableIterator;
-import htsjdk.tribble.readers.TabixReader;
-import htsjdk.tribble.readers.TabixReader.Iterator;
-import htsjdk.variant.variantcontext.VariantContext;
-import htsjdk.variant.variantcontext.VariantContextBuilder;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,6 +9,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import com.google.common.collect.ImmutableList;
+
+import de.charite.compbio.jannovar.UncheckedJannovarException;
+import de.charite.compbio.jannovar.vardbs.base.DatabaseVariantContextProvider;
+import htsjdk.samtools.util.CloseableIterator;
+import htsjdk.tribble.readers.TabixReader;
+import htsjdk.tribble.readers.TabixReader.Iterator;
+import htsjdk.variant.variantcontext.VariantContext;
+import htsjdk.variant.variantcontext.VariantContextBuilder;
 
 /**
  * Read TSV records as {@link VariantContext} entries.
@@ -40,7 +43,7 @@ public class GenericTSVVariantContextProvider implements DatabaseVariantContextP
 		try {
 			this.tabixReader = new TabixReader(tsvPath, tsvPath + ".tbi");
 		} catch (IOException e) {
-			throw new RuntimeException("Could not open TABIX file " + tsvPath, e);
+			throw new UncheckedJannovarException("Could not open TABIX file " + tsvPath, e);
 		}
 	}
 
@@ -65,7 +68,7 @@ public class GenericTSVVariantContextProvider implements DatabaseVariantContextP
 			try {
 				this.next = iter.next();
 			} catch (IOException e) {
-				throw new RuntimeException("Problem reading from " + options.getTsvFile(), e);
+				throw new UncheckedJannovarException("Problem reading from " + options.getTsvFile(), e);
 			}
 		}
 
@@ -80,7 +83,7 @@ public class GenericTSVVariantContextProvider implements DatabaseVariantContextP
 			try {
 				next = iter.next();
 			} catch (IOException e) {
-				throw new RuntimeException("Problem reading from " + options.getTsvFile(), e);
+				throw new UncheckedJannovarException("Problem reading from " + options.getTsvFile(), e);
 			}
 			return parseTabixLine(resultLine);
 		}

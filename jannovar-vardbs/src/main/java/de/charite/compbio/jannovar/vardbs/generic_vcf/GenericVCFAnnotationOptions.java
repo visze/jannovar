@@ -1,8 +1,11 @@
 package de.charite.compbio.jannovar.vardbs.generic_vcf;
 
-import com.google.common.collect.ImmutableList;
-import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
 import java.util.List;
+
+import com.google.common.collect.ImmutableList;
+
+import de.charite.compbio.jannovar.UncheckedJannovarException;
+import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
 
 /**
  * Configuration for generic annotation of VCF with options.
@@ -27,7 +30,7 @@ public class GenericVCFAnnotationOptions extends DBAnnotationOptions {
 	public static GenericVCFAnnotationOptions parseFrom(String s) {
 		String tokens[] = s.split(":", 3);
 		if (tokens.length != 3) {
-			throw new RuntimeException("Could not parse VCF annotation config from " + s);
+			throw new UncheckedJannovarException("Could not parse VCF annotation config from " + s);
 		}
 
 		return new GenericVCFAnnotationOptions(true, false, tokens[1],

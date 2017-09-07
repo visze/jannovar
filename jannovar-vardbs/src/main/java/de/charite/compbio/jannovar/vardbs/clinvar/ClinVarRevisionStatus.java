@@ -1,5 +1,7 @@
 package de.charite.compbio.jannovar.vardbs.clinvar;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
+
 /**
  * Enum for describing ClinVar CLNREVSTAT
  * 
@@ -59,7 +61,7 @@ public enum ClinVarRevisionStatus {
         case "single":
             return SINGLE;
         default:
-            throw new RuntimeException("Invalid clin var revision status: " + s);
+            throw new UncheckedJannovarException("Invalid clin var revision status: " + s);
         }
     }
 }

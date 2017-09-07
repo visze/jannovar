@@ -277,7 +277,7 @@ public class GeneWiseMendelianAnnotationProcessor implements VariantContextProce
 		}
 
 		if (!doneGenes.isEmpty() && activeGenes.isEmpty() && !activeVariants.isEmpty())
-			throw new RuntimeException("All genes inactive, there should be no active variant");
+			throw new UncheckedJannovarException("All genes inactive, there should be no active variant");
 	}
 
 	/**
@@ -425,7 +425,7 @@ public class GeneWiseMendelianAnnotationProcessor implements VariantContextProce
 		 */
 		int registerContig(String name) {
 			if (isContigKnown(name))
-				throw new RuntimeException("Seeing contig " + name
+				throw new UncheckedJannovarException("Seeing contig " + name
 						+ " a second time (with other contig name in between). Is your file sorted?");
 			contigNameToNo.put(name, nextContigNo);
 			currentContig = name;

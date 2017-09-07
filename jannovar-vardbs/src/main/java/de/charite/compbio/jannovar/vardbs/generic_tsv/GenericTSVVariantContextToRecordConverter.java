@@ -1,5 +1,6 @@
 package de.charite.compbio.jannovar.vardbs.generic_tsv;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
 import de.charite.compbio.jannovar.vardbs.base.VariantContextToRecordConverter;
 import htsjdk.variant.variantcontext.VariantContext;
 
@@ -28,7 +29,7 @@ final class GenericTSVVariantContextToRecordConverter
 		GenericTSVRecordBuilder builder = new GenericTSVRecordBuilder();
 
 		if (vc.getAlternateAlleles().size() > 1) {
-			throw new RuntimeException(
+			throw new UncheckedJannovarException(
 					"Must have exactly zero or one ALT allele but this == " + this.toString());
 		}
 

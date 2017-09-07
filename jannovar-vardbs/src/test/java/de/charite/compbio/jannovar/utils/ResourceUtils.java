@@ -9,6 +9,8 @@ import java.io.StringWriter;
 
 import org.apache.commons.io.IOUtils;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
+
 /**
  * Helper class with static methods for handling resources in tests
  *
@@ -22,7 +24,7 @@ public class ResourceUtils {
 		try {
 			IOUtils.copy(ResourceUtils.class.getResourceAsStream(path), writer, "UTF-8");
 		} catch (IOException e) {
-			throw new RuntimeException("Problem reading resource " + path, e);
+			throw new UncheckedJannovarException("Problem reading resource " + path, e);
 		}
 		return writer.toString();
 	}
@@ -39,7 +41,7 @@ public class ResourceUtils {
 				os.write(buffer, 0, length);
 			}
 		} catch (IOException e) {
-			throw new RuntimeException("Problem with copying resource to file", e);
+			throw new UncheckedJannovarException("Problem with copying resource to file", e);
 		}
 	}
 

@@ -1,5 +1,6 @@
 package de.charite.compbio.jannovar.reference;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
 
 /**
  * Helper code for the normalization of {@link GenomeVariant}s.
@@ -79,7 +80,7 @@ public final class GenomeVariantNormalizer {
 		try {
 			shiftedPos = projector.transcriptToGenomePos(txPos.shifted(shift));
 		} catch (ProjectionException e) {
-			throw new RuntimeException("Bug: transcript position must be valid here!", e);
+			throw new UncheckedJannovarException("Bug: transcript position must be valid here!", e);
 		}
 
 		if (shift == 0) // only rebuild if shift > 0

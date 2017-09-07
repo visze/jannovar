@@ -2,6 +2,7 @@ package de.charite.compbio.jannovar.annotation.builders;
 
 import java.util.ArrayList;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
 import de.charite.compbio.jannovar.annotation.Annotation;
 import de.charite.compbio.jannovar.annotation.InvalidGenomeVariant;
 import de.charite.compbio.jannovar.annotation.VariantEffect;
@@ -116,7 +117,7 @@ public final class InsertionAnnotationBuilder extends AnnotationBuilder {
 							posBuilder.getNucleotidePointLocation(projector.transcriptToGenomePos(txPos.shifted(-1))));
 					return new NucleotideDuplication(false, range, new NucleotideSeqDescription());
 				} catch (ProjectionException e) {
-					throw new RuntimeException("Bug: positions should be valid here", e);
+					throw new UncheckedJannovarException("Bug: positions should be valid here", e);
 				}
 			} else {
 				try {
@@ -127,7 +128,7 @@ public final class InsertionAnnotationBuilder extends AnnotationBuilder {
 					final NucleotideRange range = new NucleotideRange(firstPos, lastPos);
 					return new NucleotideDuplication(false, range, new NucleotideSeqDescription());
 				} catch (ProjectionException e) {
-					throw new RuntimeException("Bug: positions should be valid here", e);
+					throw new UncheckedJannovarException("Bug: positions should be valid here", e);
 				}
 			}
 		} else {

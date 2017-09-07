@@ -33,7 +33,7 @@ public enum VariantConfiguration {
 		case "/":
 			return MOSAIC;
 		default:
-			throw new RuntimeException("No VariantConfiguration known for string " + s);
+			throw new UncheckedHGVSJannovarException("No VariantConfiguration known for string " + s);
 		}
 	}
 
@@ -51,7 +51,7 @@ public enum VariantConfiguration {
 		case MOSAIC:
 			return "/";
 		default:
-			throw new RuntimeException("Unhandled VariantConfiguration " + this);
+			throw new UncheckedHGVSJannovarException("Unhandled VariantConfiguration " + this);
 		}
 	}
 

@@ -408,7 +408,7 @@ public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
 				final String s = (String) o;
 				for (String s2 : s.split(",")) {
 					if (!DbNsfpFields.DBNSFP_FIELDS.containsKey(s2)) {
-						throw new RuntimeException(
+						throw new UncheckedJannovarException(
 								"Unknown field from dbNSFP or not yet supported: " + s);
 					} else {
 						columnsDbNsfp.add(s2);
@@ -914,7 +914,7 @@ public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
 		public static BedAnnotationOptions parseFrom(String strValue) {
 			String tokens[] = strValue.split(":", 4);
 			if (tokens.length < 3) {
-				throw new RuntimeException("Could not parse BED annotation from " + strValue);
+				throw new UncheckedJannovarException("Could not parse BED annotation from " + strValue);
 			} else if (tokens.length == 3) {
 				return new BedAnnotationOptions(tokens[0], tokens[1], tokens[2]);
 			} else {

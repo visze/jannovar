@@ -1,5 +1,7 @@
 package de.charite.compbio.jannovar.hgvs.protein.change;
 
+import de.charite.compbio.jannovar.hgvs.UncheckedHGVSJannovarException;
+
 /**
  * Enum with for the miscellaneous protein changes.
  *
@@ -29,7 +31,7 @@ public enum ProteinMiscChangeType {
 		case NO_PROTEIN:
 			return onlyPredicted ? "0?" : "0";
 		default:
-			throw new RuntimeException("Unknown protein misc change tyep " + this);
+			throw new UncheckedHGVSJannovarException("Unknown protein misc change tyep " + this);
 		}
 	}
 

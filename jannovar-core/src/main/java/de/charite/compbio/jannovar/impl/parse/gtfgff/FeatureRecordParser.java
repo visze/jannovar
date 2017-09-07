@@ -5,6 +5,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
+
 /**
  * Abstract base class for GTF/GFF record parsers.
  * 
@@ -22,7 +24,7 @@ public abstract class FeatureRecordParser {
 	
 		String[] arr = line.trim().split("\\t");
 		if (arr.length != 9)
-			throw new RuntimeException("Wrong number of fields in GFF file!");
+			throw new UncheckedJannovarException("Wrong number of fields in GFF file!");
 	
 		final String chrom = arr[0];
 		final String source = arr[1];

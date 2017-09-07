@@ -1,14 +1,17 @@
 package de.charite.compbio.jannovar.vardbs.generic_tsv;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
-import htsjdk.variant.vcf.VCFHeaderLineType;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
+
+import de.charite.compbio.jannovar.UncheckedJannovarException;
+import de.charite.compbio.jannovar.vardbs.base.DBAnnotationOptions;
+import htsjdk.variant.vcf.VCFHeaderLineType;
 
 /**
  * Configuration for generic TSV annotation.
@@ -67,7 +70,7 @@ public class GenericTSVAnnotationOptions extends DBAnnotationOptions {
 	public static GenericTSVAnnotationOptions parseFrom(String strValue) {
 		String tokens[] = strValue.split(":");
 		if (tokens.length != 13) {
-			throw new RuntimeException("Wrong number of tokens tokens in TSV annotation configuration " + strValue
+			throw new UncheckedJannovarException("Wrong number of tokens tokens in TSV annotation configuration " + strValue
 					+ " expected 13 but was " + tokens.length);
 		}
 

@@ -1,5 +1,12 @@
 package de.charite.compbio.jannovar.cmd.annotate_vcf;
 
+import java.io.Closeable;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import de.charite.compbio.jannovar.UncheckedJannovarException;
 import de.charite.compbio.jannovar.cmd.annotate_vcf.JannovarAnnotateVCFOptions.BedAnnotationOptions;
 import htsjdk.samtools.util.Interval;
 import htsjdk.tribble.TabixFeatureReader;
@@ -12,11 +19,6 @@ import htsjdk.variant.vcf.VCFHeader;
 import htsjdk.variant.vcf.VCFHeaderLineCount;
 import htsjdk.variant.vcf.VCFHeaderLineType;
 import htsjdk.variant.vcf.VCFInfoHeaderLine;
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Perform annotation of {@link VariantContext}s using BED files.
@@ -42,7 +44,7 @@ public class BedFileAnnotator implements Closeable {
 			this.reader = new TabixFeatureReader<>(featureFile.getAbsolutePath().toString(),
 					featureFile.getAbsolutePath().toString() + ".tbi", new BEDCodec());
 		} catch (IOException e) {
-			throw new RuntimeException("Problem opening indexed BED file", e);
+			throw new UncheckedJannovarException("Problem opening indexed BED file", e);
 		}
 	}
 
@@ -89,7 +91,7 @@ public class BedFileAnnotator implements Closeable {
 				}
 			}
 		} catch (IOException e) {
-			throw new RuntimeException(
+			throw new UncheckedJannovarException(
 					"Could not query " + vc.getContig() + ":" + vc.getStart() + "-" + vc.getEnd(),
 					e);
 		}
@@ -113,7 +115,7 @@ public class BedFileAnnotator implements Closeable {
 			try {
 				reader.close();
 			} catch (IOException e) {
-				throw new RuntimeException("Could not close BED reader", e);
+				throw new UncheckedJannovarException("Could not close BED reader", e);
 			}
 			reader = null;
 		}

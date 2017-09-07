@@ -1,5 +1,7 @@
 package de.charite.compbio.jannovar.vardbs.base;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
+
 /**
  * Configuration for annotating variants with information from databases.
  * 
@@ -43,7 +45,7 @@ public class DBAnnotationOptions {
 		this.multiMatchBehaviour = multiMatchBehaviour;
 
 		if (multiMatchBehaviour == MultipleMatchBehaviour.BEST_AND_ALL)
-			throw new RuntimeException("Multi-match behaviour BEST_AND_ALL not implemented yet!");
+			throw new UncheckedJannovarException("Multi-match behaviour BEST_AND_ALL not implemented yet!");
 	}
 
 	public boolean isReportOverlapping() {

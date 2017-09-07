@@ -1,8 +1,6 @@
-package de.charite.compbio.jannovar.annotation.builders;
+package de.charite.compbio.jannovar.annotation;
 
 public class AnnotationError extends Error {
-
-
 
 	/**
 	 * Serial id
@@ -11,5 +9,9 @@ public class AnnotationError extends Error {
 
 	public AnnotationError(String msg) {
 		super(msg);
+	}
+
+	public AnnotationError(String msg, Throwable cause) {
+		super(msg, cause);
 	}
 }

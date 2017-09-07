@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
 import de.charite.compbio.jannovar.vardbs.base.VariantContextToRecordConverter;
 import htsjdk.variant.variantcontext.Allele;
 import htsjdk.variant.variantcontext.VariantContext;
@@ -95,16 +96,16 @@ final class ClinVarVariantContextToRecordConverter implements VariantContextToRe
 			// Set one-element lists into annoBuilder
 			annoBuilder.setAlleleMapping(alleleID);
 			if (hgvsList.size() != 1)
-				throw new RuntimeException("Invalid HGVS size, must be 1");
+				throw new UncheckedJannovarException("Invalid HGVS size, must be 1");
 			annoBuilder.setHgvsVariant(hgvsList.get(0));
 			if (clnOriginList.size() != 1)
-				throw new RuntimeException("Invalid CLNORIGIN size, must be 1");
+				throw new UncheckedJannovarException("Invalid CLNORIGIN size, must be 1");
 			annoBuilder.setOrigin(ClinVarOrigin.fromInteger(Integer.parseInt(clnOriginList.get(0))));
 
 			// Construct variant source information
 			List<ClinVarSourceInfo> sourceInfos = new ArrayList<>();
 			if (clnSrcList.size() != clnSrcIdList.size())
-				throw new RuntimeException("length of CLNSRC differ CLNSRCID");
+				throw new UncheckedJannovarException("length of CLNSRC differ CLNSRCID");
 			for (int i = 0; i < clnSrcList.size(); ++i)
 				sourceInfos.add(new ClinVarSourceInfo(clnSrcList.get(i), clnSrcIdList.get(i)));
 			annoBuilder.setSourceInfos(sourceInfos);

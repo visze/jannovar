@@ -2,6 +2,7 @@ package de.charite.compbio.jannovar.mendel.filter;
 
 import java.util.TreeSet;
 
+import de.charite.compbio.jannovar.UncheckedJannovarException;
 import de.charite.compbio.jannovar.mendel.SubModeOfInheritance;
 import htsjdk.variant.variantcontext.VariantContext;
 
@@ -33,7 +34,7 @@ public class VariantContextCounter {
 	public int decrement() {
 		--this.counter;
 		if (this.counter < 0)
-			throw new RuntimeException("Negative counter " + this.counter);
+			throw new UncheckedJannovarException("Negative counter " + this.counter);
 		return this.counter;
 	}
 
@@ -52,7 +53,7 @@ public class VariantContextCounter {
 	public void setCounter(int counter) {
 		this.counter = counter;
 		if (this.counter < 0)
-			throw new RuntimeException("Negative counter " + this.counter);
+			throw new UncheckedJannovarException("Negative counter " + this.counter);
 	}
 
 	public void addCompatibleMode(SubModeOfInheritance mode) {
