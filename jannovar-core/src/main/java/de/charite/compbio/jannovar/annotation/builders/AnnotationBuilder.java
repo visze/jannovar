@@ -105,7 +105,7 @@ abstract class AnnotationBuilder {
 				if (!change.equals(this.change))
 					messages.add(AnnotationMessage.INFO_REALIGN_3_PRIME);
 			} catch (ProjectionException e) {
-				throw new Error("Bug: change begin position must be on transcript.");
+				throw new AnnotationError("Bug: change begin position must be on transcript.");
 			}
 		} else {
 			this.change = change;
@@ -382,7 +382,7 @@ abstract class AnnotationBuilder {
 				return locBuilder.build();
 			}
 
-			throw new Error("Bug: position should be in exon if we reach here");
+			throw new AnnotationError("Bug: position should be in exon if we reach here");
 		} else {
 			// at least one base is changed
 			GenomePosition firstChangePos = change.getGenomeInterval().getGenomeBeginPos();
