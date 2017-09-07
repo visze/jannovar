@@ -9,10 +9,10 @@ import de.charite.compbio.jannovar.JannovarException;
  */
 public class SerializationException extends JannovarException {
 	
+	private static final long serialVersionUID = 1L;
+	
 	public SerializationException(String msg) {
 		super(msg);
 	}
-
-	private static final long serialVersionUID = 1L;
 
 }

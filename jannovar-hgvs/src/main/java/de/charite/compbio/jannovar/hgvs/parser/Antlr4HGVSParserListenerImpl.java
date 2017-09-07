@@ -76,8 +76,14 @@ class Antlr4HGVSParserListenerImpl extends Antlr4HGVSParserBaseListener {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Antlr4HGVSParserListenerImpl.class);
 
 	/** maps nodes to Objects with Map<ParseTree,Object> */
-	ParseTreeProperty<Object> values = new ParseTreeProperty<>();
+	private ParseTreeProperty<Object> values = new ParseTreeProperty<>();
 
+	/** resulting {@link HGVSVariant} */
+	private HGVSVariant hgvsVariant = null;
+	
+	/** resulting {@link LegacyVariant} */
+	private LegacyVariant legacyVariant = null;
+	
 	public void setValue(ParseTree node, Object value) {
 		// System.err.println("setValue(" + node + ", " + value + ")");
 		values.put(node, value);
@@ -87,16 +93,10 @@ class Antlr4HGVSParserListenerImpl extends Antlr4HGVSParserBaseListener {
 		return values.get(node);
 	}
 
-	/** resulting {@link HGVSVariant} */
-	HGVSVariant hgvsVariant = null;
-
 	/** @return resulting {@link HGVSVariant} */
 	public HGVSVariant getHGVSVariant() {
 		return hgvsVariant;
 	}
-
-	/** resulting {@link LegacyVariant} */
-	LegacyVariant legacyVariant = null;
 
 	/** @return resulting {@link LegacyVariant} */
 	public LegacyVariant getLegacyVariant() {

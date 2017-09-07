@@ -6,12 +6,7 @@ package de.charite.compbio.jannovar.filter.facade;
  * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
  */
 public class PedigreeFilterOptions {
-
-
-	public static PedigreeFilterOptions buildDefaultOptions() {
-		return new PedigreeFilterOptions(1, true);
-	}
-
+	
 	/**
 	 * Maximal allelic depth of alternative allele to tolerate in parent before
 	 * flagging with ParentAd2.
@@ -23,6 +18,10 @@ public class PedigreeFilterOptions {
 	 */
 	private final boolean applyParentGtFilteredFilters;
 
+
+	public static PedigreeFilterOptions buildDefaultOptions() {
+		return new PedigreeFilterOptions(1, true);
+	}
 
 	public PedigreeFilterOptions(int deNovoMaxParentAd2, boolean applyParentGtFilteredFilters) {
 		this.deNovoMaxParentAd2 = deNovoMaxParentAd2;
