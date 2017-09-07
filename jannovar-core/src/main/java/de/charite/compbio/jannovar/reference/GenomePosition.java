@@ -111,7 +111,7 @@ public final class GenomePosition implements Serializable, Comparable<GenomePosi
 	 */
 	public boolean isLt(GenomePosition other) {
 		if (other.strand != strand)
-			other = other.withStrand(strand);
+			return (pos < other.withStrand(strand).pos);
 		return (pos < other.pos);
 	}
 
@@ -122,7 +122,7 @@ public final class GenomePosition implements Serializable, Comparable<GenomePosi
 		if (other.chr != chr)
 			return false;
 		if (other.strand != strand)
-			other = other.withStrand(strand);
+			return (pos <= other.withStrand(strand).pos);
 		return (pos <= other.pos);
 	}
 
@@ -133,7 +133,7 @@ public final class GenomePosition implements Serializable, Comparable<GenomePosi
 		if (other.chr != chr)
 			return false;
 		if (other.strand != strand)
-			other = other.withStrand(strand);
+			return (pos > other.withStrand(strand).pos);
 		return (pos > other.pos);
 	}
 
@@ -144,7 +144,7 @@ public final class GenomePosition implements Serializable, Comparable<GenomePosi
 		if (other.chr != chr)
 			return false;
 		if (other.strand != strand)
-			other = other.withStrand(strand);
+			return (pos >= other.withStrand(strand).pos);
 		return (pos >= other.pos);
 	}
 
@@ -155,7 +155,7 @@ public final class GenomePosition implements Serializable, Comparable<GenomePosi
 		if (other.chr != chr)
 			return false;
 		if (other.strand != strand)
-			other = other.withStrand(strand);
+			return (pos ==  other.withStrand(strand).pos);
 		return (pos == other.pos);
 	}
 
@@ -171,7 +171,7 @@ public final class GenomePosition implements Serializable, Comparable<GenomePosi
 		if (chr != pos.chr)
 			throw new InvalidCoordinateException("Coordinates are on different chromosomes " + this + " vs. " + pos);
 		if (pos.strand != strand)
-			pos = pos.withStrand(strand);
+			return (this.pos - pos.withStrand(strand).pos);
 		return (this.pos - pos.pos);
 	}
 

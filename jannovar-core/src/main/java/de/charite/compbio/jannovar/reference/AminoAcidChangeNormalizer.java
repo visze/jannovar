@@ -64,6 +64,7 @@ public final class AminoAcidChangeNormalizer {
 	public static AminoAcidChange truncateBothSides(AminoAcidChange aaChange) {
 		// TODO(holtgrem): Test me!
 
+		AminoAcidChange truncatedAAChange = aaChange;
 		// Truncate suffixes / from the right.
 		final int REFLEN = aaChange.getRef().length() - 1;
 		final int ALTLEN = aaChange.getAlt().length() - 1;
@@ -72,7 +73,7 @@ public final class AminoAcidChangeNormalizer {
 				&& aaChange.getRef().charAt(REFLEN - truncSuffix) == aaChange.getAlt().charAt(ALTLEN - truncSuffix))
 			++truncSuffix;
 		if (truncSuffix != 0)
-			aaChange = new AminoAcidChange(aaChange.getPos(),
+			truncatedAAChange = new AminoAcidChange(aaChange.getPos(),
 					aaChange.getRef().substring(0, aaChange.getRef().length() - truncSuffix), aaChange.getAlt().substring(0,
 							aaChange.getAlt().length() - truncSuffix));
 
@@ -82,10 +83,10 @@ public final class AminoAcidChangeNormalizer {
 				&& aaChange.getRef().charAt(truncPrefix) == aaChange.getAlt().charAt(truncPrefix))
 			++truncPrefix;
 		if (truncPrefix != 0)
-			aaChange = new AminoAcidChange(aaChange.getPos() + truncPrefix, aaChange.getRef().substring(truncPrefix),
+			truncatedAAChange = new AminoAcidChange(aaChange.getPos() + truncPrefix, aaChange.getRef().substring(truncPrefix),
 					aaChange.getAlt().substring(truncPrefix));
 
-		return aaChange;
+		return truncatedAAChange;
 	}
 
 	/**

@@ -89,7 +89,7 @@ abstract class AnnotationBuilder {
 		this.options = options;
 
 		// Project the change to the same strand as transcript, reverse-complementing the REF/ALT strings.
-		change = change.withStrand(transcript.getStrand());
+		GenomeVariant changeWithStrand = change.withStrand(transcript.getStrand());
 		this.transcript = transcript;
 
 		this.so = new TranscriptSequenceOntologyDecorator(transcript);
@@ -98,18 +98,18 @@ abstract class AnnotationBuilder {
 		this.seqDecorator = new TranscriptSequenceDecorator(transcript);
 
 		// Shift the GenomeChange if lies within precisely one exon.
-		if (so.liesInExon(change.getGenomeInterval())) {
+		if (so.liesInExon(changeWithStrand.getGenomeInterval())) {
 			try {
 				// normalize amino acid change and add information about this into {@link messages}
-				this.change = GenomeVariantNormalizer.normalizeGenomeChange(transcript, change,
-						projector.genomeToTranscriptPos(change.getGenomePos()));
-				if (!change.equals(this.change))
+				this.change = GenomeVariantNormalizer.normalizeGenomeChange(transcript, changeWithStrand,
+						projector.genomeToTranscriptPos(changeWithStrand.getGenomePos()));
+				if (!changeWithStrand.equals(this.change))
 					messages.add(AnnotationMessage.INFO_REALIGN_3_PRIME);
 			} catch (ProjectionException e) {
 				throw new AnnotationError("Bug: change begin position must be on transcript.");
 			}
 		} else {
-			this.change = change;
+			this.change = changeWithStrand;
 		}
 
 		this.locAnno = buildLocAnno(transcript, this.change);
