@@ -20,6 +20,12 @@ public final class IntervalArray<T> implements Serializable {
 
 	/** version number to use when serializing */
 	private static final long serialVersionUID = 1L;
+	
+	/** list of {@link Interval} objects, sorted by begin position */
+	private final ImmutableList<Interval<T>> intervals;
+
+	/** list of {@link Interval} objects, sorted by end position */
+	private final ImmutableList<Interval<T>> intervalsEnd;
 
 	// TODO(holtgrew): store lists for left and right as well?
 	/**
@@ -68,11 +74,7 @@ public final class IntervalArray<T> implements Serializable {
 		}
 	}
 
-	/** list of {@link Interval} objects, sorted by begin position */
-	private final ImmutableList<Interval<T>> intervals;
-
-	/** list of {@link Interval} objects, sorted by end position */
-	private final ImmutableList<Interval<T>> intervalsEnd;
+	
 
 	/**
 	 * Construct object with the given values.
@@ -272,6 +274,13 @@ public final class IntervalArray<T> implements Serializable {
 	 * Helper class for building the interval lists.
 	 */
 	private class IntervalListBuilder {
+		
+		private final Collection<T> elements;
+		private final IntervalEndExtractor<T> extractor;
+
+		private ArrayList<MutableInterval<T>> tmpList = null;
+		private ImmutableList<Interval<T>> intervals = null;
+		private ImmutableList<Interval<T>> intervalsEnd = null;
 
 		class TwoIntervalList {
 			private final ImmutableList<Interval<T>> intervals;
@@ -283,12 +292,7 @@ public final class IntervalArray<T> implements Serializable {
 			}
 		}
 
-		private final Collection<T> elements;
-		private final IntervalEndExtractor<T> extractor;
-
-		private ArrayList<MutableInterval<T>> tmpList = null;
-		private ImmutableList<Interval<T>> intervals = null;
-		private ImmutableList<Interval<T>> intervalsEnd = null;
+		
 
 		public IntervalListBuilder(Collection<T> elements, IntervalEndExtractor<T> extractor) {
 			this.elements = elements;

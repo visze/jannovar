@@ -7,21 +7,6 @@ package de.charite.compbio.jannovar.vardbs.base;
  */
 public class DBAnnotationOptions {
 
-	/** Enum for representing behaviour in the case of multiple matches */
-	public enum MultipleMatchBehaviour {
-		/** Annotate best one (highest frequency) only */
-		BEST_ONLY,
-		/** Annotate best one (highest frequency), give alternative ones as an additional list */
-		BEST_AND_ALL // TODO
-	}
-
-	/**
-	 * @return Default options
-	 */
-	public static DBAnnotationOptions createDefaults() {
-		return new DBAnnotationOptions(true, false, "", MultipleMatchBehaviour.BEST_ONLY);
-	}
-
 	/** Whether or not to report overlapping variants at all (default: true) */
 	private boolean reportOverlapping;
 	/**
@@ -33,6 +18,22 @@ public class DBAnnotationOptions {
 	private String identifierPrefix;
 	/** Behaviour on multiple matching annotations */
 	private MultipleMatchBehaviour multiMatchBehaviour;
+	
+	/** Enum for representing behaviour in the case of multiple matches */
+	public enum MultipleMatchBehaviour {
+		/** Annotate best one (highest frequency) only */
+		BEST_ONLY,
+		/** Annotate best one (highest frequency), give alternative ones as an additional list */
+		BEST_AND_ALL // TODO
+	}
+	
+
+	/**
+	 * @return Default options
+	 */
+	public static DBAnnotationOptions createDefaults() {
+		return new DBAnnotationOptions(true, false, "", MultipleMatchBehaviour.BEST_ONLY);
+	}
 
 	public DBAnnotationOptions(boolean reportOverlapping, boolean reportOverlappingAsIdentical,
 			String identifierPrefix, MultipleMatchBehaviour multiMatchBehaviour) {

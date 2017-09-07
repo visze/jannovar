@@ -10,35 +10,6 @@ import htsjdk.variant.vcf.VCFFileReader;
 
 public class GenotypeFilterTestBase {
 
-	/**
-	 * Write out VCF file with one line and additional header, read in line again and return record
-	 * 
-	 * @param vcfHeaderLines
-	 *            Additional VCF headers to write
-	 * @param vcfLine
-	 *            VCF line to write
-	 * @return
-	 * @throws Exception
-	 *             in case of any problems
-	 */
-	protected VariantContext writeAndReadVcfLine(String vcfLine, String vcfHeaderLines) throws Exception {
-		// Setup dbSNP VCF file
-		File tmpDir = Files.createTempDir();
-
-		// Write out file to use in the test
-		String testVCFPath = tmpDir + "/test_file.vcf";
-		PrintWriter writer = new PrintWriter(testVCFPath);
-		writer.write("##fileformat=VCFv4.0\n");
-		writer.write(vcfHeaderLines);
-		writer.write("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tindividual\n");
-		writer.write(vcfLine);
-		writer.close();
-
-		try (VCFFileReader vcfReader = new VCFFileReader(new File(testVCFPath), false)) {
-			return vcfReader.iterator().next();
-		}
-	}
-
 	public static final String BCFTOOLS_HEADER = "##ALT=<ID=X,Description=\"Represents allele(s) other than observed.\">\n"
 			+ "##INFO=<ID=INDEL,Number=0,Type=Flag,Description=\"Indicates that the variant is an INDEL.\">\n"
 			+ "##INFO=<ID=IDV,Number=1,Type=Integer,Description=\"Maximum number of reads supporting an indel\">\n"
@@ -193,5 +164,34 @@ public class GenotypeFilterTestBase {
 			+ "##FILTER=<ID=QualDepth,Description=\"Variant quality/Read depth ratio is low.\">\n"
 			+ "##FILTER=<ID=REFCALL,Description=\"This line represents a homozygous reference call\">\n"
 			+ "##FILTER=<ID=QD,Description=\"Variants fail quality/depth filter.\">\n";
+	
+	/**
+	 * Write out VCF file with one line and additional header, read in line again and return record
+	 * 
+	 * @param vcfHeaderLines
+	 *            Additional VCF headers to write
+	 * @param vcfLine
+	 *            VCF line to write
+	 * @return
+	 * @throws Exception
+	 *             in case of any problems
+	 */
+	protected VariantContext writeAndReadVcfLine(String vcfLine, String vcfHeaderLines) throws Exception {
+		// Setup dbSNP VCF file
+		File tmpDir = Files.createTempDir();
+
+		// Write out file to use in the test
+		String testVCFPath = tmpDir + "/test_file.vcf";
+		PrintWriter writer = new PrintWriter(testVCFPath);
+		writer.write("##fileformat=VCFv4.0\n");
+		writer.write(vcfHeaderLines);
+		writer.write("#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tindividual\n");
+		writer.write(vcfLine);
+		writer.close();
+
+		try (VCFFileReader vcfReader = new VCFFileReader(new File(testVCFPath), false)) {
+			return vcfReader.iterator().next();
+		}
+	}
 
 }

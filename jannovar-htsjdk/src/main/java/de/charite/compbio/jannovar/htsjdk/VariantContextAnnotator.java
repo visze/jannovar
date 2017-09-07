@@ -41,6 +41,16 @@ public final class VariantContextAnnotator {
 
 	/** the logger object to use */
 	private static final Logger LOGGER = LoggerFactory.getLogger(VariantContextAnnotator.class);
+	
+	/** the {@link ReferenceDictionary} to use */
+	private final ReferenceDictionary refDict;
+	/** {@link Chromosome} map with the {@link TranscriptModel}s, probably from {@link JannovarData} */
+	private final ImmutableMap<Integer, Chromosome> chromosomeMap;
+	/** configuration */
+	private final Options options;
+
+	/** implementation of the actual variant annotation */
+	private final VariantAnnotator annotator;
 
 	/**
 	 * Options class for {@link VariantContextAnnotator}
@@ -147,16 +157,6 @@ public final class VariantContextAnnotator {
 		}
 
 	}
-
-	/** the {@link ReferenceDictionary} to use */
-	private final ReferenceDictionary refDict;
-	/** {@link Chromosome} map with the {@link TranscriptModel}s, probably from {@link JannovarData} */
-	private final ImmutableMap<Integer, Chromosome> chromosomeMap;
-	/** configuration */
-	private final Options options;
-
-	/** implementation of the actual variant annotation */
-	private final VariantAnnotator annotator;
 
 	/**
 	 * Construct annotator with default options.

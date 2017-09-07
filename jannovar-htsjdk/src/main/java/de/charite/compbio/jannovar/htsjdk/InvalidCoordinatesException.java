@@ -9,6 +9,8 @@ import de.charite.compbio.jannovar.annotation.AnnotationMessage;
  */
 public class InvalidCoordinatesException extends Exception {
 
+	private static final long serialVersionUID = 1L;
+	
 	final private AnnotationMessage annotationMessage;
 
 	public InvalidCoordinatesException(AnnotationMessage annotationMessage) {
@@ -30,6 +32,5 @@ public class InvalidCoordinatesException extends Exception {
 		return annotationMessage;
 	}
 
-	private static final long serialVersionUID = 1L;
 
 }

@@ -8,6 +8,8 @@ import de.charite.compbio.jannovar.JannovarException;
  * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
  */
 public class CommandLineParsingException extends JannovarException {
+	
+	private static final long serialVersionUID = 1L;
 
 	public CommandLineParsingException() {
 		super();
@@ -20,7 +22,5 @@ public class CommandLineParsingException extends JannovarException {
 	public CommandLineParsingException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
-
-	private static final long serialVersionUID = 1L;
 
 }

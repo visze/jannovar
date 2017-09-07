@@ -889,6 +889,18 @@ public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
 	 */
 	public static class BedAnnotationOptions {
 
+		/** Path to BED file */
+		private final String pathBed;
+
+		/** Label to use for INFO field. */
+		private final String infoField;
+
+		/** Description to use for INFO field. */
+		private final String description;
+
+		/** 0-based column to write into VCF file, if any, <code>-1</code> for none */
+		private final int colNo;
+
 		/**
 		 * Construct new BED annotation from command line option value.
 		 * 
@@ -911,17 +923,6 @@ public class JannovarAnnotateVCFOptions extends JannovarAnnotationOptions {
 			}
 		}
 
-		/** Path to BED file */
-		private final String pathBed;
-
-		/** Label to use for INFO field. */
-		private final String infoField;
-
-		/** Description to use for INFO field. */
-		private final String description;
-
-		/** 0-based column to write into VCF file, if any, <code>-1</code> for none */
-		private final int colNo;
 
 		public BedAnnotationOptions(String pathBed, String infoField, String description) {
 			this(pathBed, infoField, description, -1);

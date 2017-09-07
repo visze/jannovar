@@ -8,14 +8,16 @@ import java.io.IOException;
  * @author mjaeger
  */
 public class InvalidAttributeException extends IOException {
+	
+	/**
+	 * Serialization
+	 */
+	private static final long serialVersionUID = 1L;
+
 
 	public InvalidAttributeException(String msg) {
 		super(msg);
 	}
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
 
 }

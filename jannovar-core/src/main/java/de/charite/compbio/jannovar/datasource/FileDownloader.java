@@ -28,6 +28,9 @@ import de.charite.compbio.jannovar.impl.util.ProgressBar;
  * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
  */
 final class FileDownloader {
+	
+	/** configuration for the downloader */
+	private Options options;
 
 	/** the logger object to use */
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileDownloader.class);
@@ -49,8 +52,7 @@ final class FileDownloader {
 		public ProxyOptions ftp = new ProxyOptions();
 	}
 
-	/** configuration for the downloader */
-	Options options;
+
 
 	/** Initializer FileDownloader with the given options string */
 	FileDownloader(Options options) {

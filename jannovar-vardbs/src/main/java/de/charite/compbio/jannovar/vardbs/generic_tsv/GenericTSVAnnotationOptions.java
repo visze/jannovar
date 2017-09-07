@@ -16,6 +16,40 @@ import java.util.Map;
  * @author <a href="mailto:manuel.holtgrewe@bihealth.de">Manuel Holtgrewe</a>
  */
 public class GenericTSVAnnotationOptions extends DBAnnotationOptions {
+	
+	
+	/** File with TSV annotations. */
+	private File tsvFile;
+
+	/** Configuration of annotation target. */
+	private GenericTSVAnnotationTarget annotationTarget = GenericTSVAnnotationTarget.VARIANT;
+
+	/** Whether or not coordinates are 1-based. */
+	private boolean oneBasedPositions = true;
+
+	/** 1-based index of column with contig name */
+	private int contigColumnIndex = 1;
+
+	/** 1-based index of column with begin position. */
+	private int beginColumnIndex = 2;
+
+	/** 1-based index of column with end position. */
+	private int endColumnIndex = 3;
+
+	/** 1-based index of column with reference allele, 0 for none. */
+	private int refAlleleColumnIndex = 4;
+
+	/** 1-based index of column with variant allele, 0 for none. */
+	private int altAlleleColumnIndex = 5;
+
+	/** Whether or not the ref allele can be annotated. */
+	private boolean refAlleleAnnotated = false;
+
+	/** Column description names as ordered as in file. */
+	private List<String> columnNames = new ArrayList<>();
+
+	/** Description of value columns. */
+	private Map<String, GenericTSVValueColumnDescription> valueColumnDescriptions = new HashMap<>();
 
 	/**
 	 * Construct new TSV annotation configuration from command line option value.
@@ -62,39 +96,6 @@ public class GenericTSVAnnotationOptions extends DBAnnotationOptions {
 						new GenericTSVValueColumnDescription(colValue, VCFHeaderLineType.valueOf(fieldType), fieldName,
 								fieldDescription, GenericTSVAccumulationStrategy.valueOf(accStrategy))));
 	}
-
-	/** File with TSV annotations. */
-	private File tsvFile;
-
-	/** Configuration of annotation target. */
-	private GenericTSVAnnotationTarget annotationTarget = GenericTSVAnnotationTarget.VARIANT;
-
-	/** Whether or not coordinates are 1-based. */
-	private boolean oneBasedPositions = true;
-
-	/** 1-based index of column with contig name */
-	private int contigColumnIndex = 1;
-
-	/** 1-based index of column with begin position. */
-	private int beginColumnIndex = 2;
-
-	/** 1-based index of column with end position. */
-	private int endColumnIndex = 3;
-
-	/** 1-based index of column with reference allele, 0 for none. */
-	private int refAlleleColumnIndex = 4;
-
-	/** 1-based index of column with variant allele, 0 for none. */
-	private int altAlleleColumnIndex = 5;
-
-	/** Whether or not the ref allele can be annotated. */
-	private boolean refAlleleAnnotated = false;
-
-	/** Column description names as ordered as in file. */
-	private List<String> columnNames = new ArrayList<>();
-
-	/** Description of value columns. */
-	private Map<String, GenericTSVValueColumnDescription> valueColumnDescriptions = new HashMap<>();
 
 	public GenericTSVAnnotationOptions(boolean reportOverlapping, boolean reportOverlappingAsIdentical,
 			String identifierPrefix, MultipleMatchBehaviour multiMatchBehaviour, File tsvFile,

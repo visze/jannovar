@@ -8,6 +8,8 @@ import de.charite.compbio.jannovar.UncheckedJannovarException;
  * @author <a href="mailto:manuel.holtgrewe@charite.de">Manuel Holtgrewe</a>
  */
 public class VariantContextFilterException extends UncheckedJannovarException {
+	
+	private static final long serialVersionUID = 1L;
 
 	public VariantContextFilterException(String string) {
 		super(string);
@@ -16,7 +18,5 @@ public class VariantContextFilterException extends UncheckedJannovarException {
 	public VariantContextFilterException(String string, Throwable cause) {
 		super(string, cause);
 	}
-
-	private static final long serialVersionUID = 1L;
 
 }
